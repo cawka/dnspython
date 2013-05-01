@@ -91,6 +91,7 @@ MAILA = 254
 ANY = 255
 TA = 32768
 DLV = 32769
+FH = 65429
 
 _by_text = {
     'NONE' : NONE,
@@ -154,6 +155,7 @@ _by_text = {
     'ANY' : ANY,
     'TA' : TA,
     'DLV' : DLV,
+    'FH' : FH,
     }
 
 # We construct the inverse mapping programmatically to ensure that we
