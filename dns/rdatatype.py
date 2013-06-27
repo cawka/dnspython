@@ -92,6 +92,8 @@ ANY = 255
 TA = 32768
 DLV = 32769
 FH = 65429
+NEXISTS = 65430
+NDNCERT = 65431
 
 _by_text = {
     'NONE' : NONE,
@@ -156,6 +158,8 @@ _by_text = {
     'TA' : TA,
     'DLV' : DLV,
     'FH' : FH,
+    'NEXISTS' : NEXISTS,
+    'NDNCERT' : NDNCERT,
     }
 
 # We construct the inverse mapping programmatically to ensure that we
@@ -166,7 +170,8 @@ _by_value = dict([(y, x) for x, y in _by_text.iteritems()])
 
 
 _metatypes = {
-    OPT : True
+    OPT : True,
+    NEXISTS : True,
     }
 
 _singletons = {
@@ -174,6 +179,8 @@ _singletons = {
     NXT : True,
     DNAME : True,
     NSEC : True,
+    NEXISTS : True,
+    NDNCERT : True,
     # CNAME is technically a singleton, but we allow multiple CNAMEs.
     }
 
