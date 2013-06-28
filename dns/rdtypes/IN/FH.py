@@ -73,7 +73,7 @@ class FH(dns.rdata.Rdata):
     from_text = classmethod(from_text)
 
     def to_wire(self, file, compress = None, origin = None):
-        two_ints = struct.pack("!HHH", self.priority, self.weight)
+        two_ints = struct.pack("!HH", self.priority, self.weight)
         file.write(two_ints)
         file.write(self.hint.get_ccnb())
 
@@ -83,7 +83,7 @@ class FH(dns.rdata.Rdata):
         current += 4
         rdlen -= 4
         
-        hint = pyccn.Name (ccn_data = wire[current : current + rdlen])
+        hint = pyccn.Name (ccnb_buffer = wire[current : current + rdlen])
         return cls(rdclass, rdtype, priority, weight, hint)
 
     from_wire = classmethod(from_wire)
