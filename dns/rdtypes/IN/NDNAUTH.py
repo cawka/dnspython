@@ -38,13 +38,13 @@ import struct
 import dns.exception
 import dns.rdata
 import dns.name
-import pyccn
+import ndn
 
 class NDNAUTH(dns.rdata.Rdata):
     """NDNAUTH record
 
     @ivar zoneName: NDN name of the authoritative zone
-    @type zoneName: pyccn.Name object"""
+    @type zoneName: ndn.Name object"""
 
     __slots__ = ['zoneName']
 
@@ -56,7 +56,7 @@ class NDNAUTH(dns.rdata.Rdata):
         return '%s' % (self.zoneName)
 
     def from_text(cls, rdclass, rdtype, tok, origin = None, relativize = True):
-        zoneName = pyccn.Name (tok.get_string())
+        zoneName = ndn.Name (tok.get_string())
         tok.get_eol()
         return cls(rdclass, rdtype, zoneName)
 
@@ -66,7 +66,7 @@ class NDNAUTH(dns.rdata.Rdata):
         file.write(self.zoneName.get_ccnb())
 
     def from_wire(cls, rdclass, rdtype, wire, current, rdlen, origin = None):
-        zoneName = pyccn.Name (ccnb_buffer = wire[current : current + rdlen])
+        zoneName = ndn.Name (ccnb_buffer = wire[current : current + rdlen])
         return cls(rdclass, rdtype, zoneName)
 
     from_wire = classmethod(from_wire)

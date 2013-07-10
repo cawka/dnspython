@@ -38,7 +38,7 @@ import struct
 import dns.exception
 import dns.rdata
 import dns.name
-import pyccn
+import ndn
 
 class FH(dns.rdata.Rdata):
     """FH record
@@ -48,7 +48,7 @@ class FH(dns.rdata.Rdata):
     @ivar weight: the weight
     @type weight: int
     @ivar hint: the target host
-    @type hint: pyccn.Name object"""
+    @type hint: ndn.Name object"""
 
     __slots__ = ['priority', 'weight', 'hint']
 
@@ -64,7 +64,7 @@ class FH(dns.rdata.Rdata):
     def from_text(cls, rdclass, rdtype, tok, origin = None, relativize = True):
         priority = tok.get_uint16()
         weight = tok.get_uint16()
-        hint = pyccn.Name (tok.get_string())
+        hint = ndn.Name (tok.get_string())
         if len(hint.get_ccnb ()) > 255:
             raise dns.exception.SyntaxError("forwarding hint is too long")
         tok.get_eol()
@@ -83,7 +83,7 @@ class FH(dns.rdata.Rdata):
         current += 4
         rdlen -= 4
         
-        hint = pyccn.Name (ccnb_buffer = wire[current : current + rdlen])
+        hint = ndn.Name (ccnb_buffer = wire[current : current + rdlen])
         return cls(rdclass, rdtype, priority, weight, hint)
 
     from_wire = classmethod(from_wire)

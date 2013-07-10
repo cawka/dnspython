@@ -38,13 +38,13 @@ import struct
 import dns.exception
 import dns.rdata
 import dns.name
-import pyccn
+import ndn
 
 class NDNCERTSEQ(dns.rdata.Rdata):
     """NDNCERTSEQ record
 
     @ivar seq: sequence number or version number
-    @type seq: pyccn.Name object"""
+    @type seq: ndn.Name object"""
 
     __slots__ = ['seq']
 
@@ -56,7 +56,7 @@ class NDNCERTSEQ(dns.rdata.Rdata):
         return '%s' % (self.seq)
 
     def from_text(cls, rdclass, rdtype, tok, origin = None, relativize = True):
-        seq = pyccn.Name (tok.get_string())
+        seq = ndn.Name (tok.get_string())
         tok.get_eol()
         return cls(rdclass, rdtype, seq)
 
@@ -66,7 +66,7 @@ class NDNCERTSEQ(dns.rdata.Rdata):
         file.write(self.seq.get_ccnb())
 
     def from_wire(cls, rdclass, rdtype, wire, current, rdlen, origin = None):
-        seq = pyccn.Name (ccnb_buffer = wire[current : current + rdlen])
+        seq = ndn.Name (ccnb_buffer = wire[current : current + rdlen])
         return cls(rdclass, rdtype, seq)
 
     from_wire = classmethod(from_wire)

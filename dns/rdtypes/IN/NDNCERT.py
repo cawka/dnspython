@@ -38,7 +38,7 @@ import struct
 import dns.exception
 import dns.rdata
 import dns.name
-import pyccn
+import ndn
 
 import base64
 
