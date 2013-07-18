@@ -27,4 +27,9 @@ __all__ = [
     'PX',
     'SRV',
     'WKS',
+    'FH',
+    'NDNAUTH',
+    'NDNCERT',
+    'NDNCERTSEQ',
+    'NEXISTS',
 ]
