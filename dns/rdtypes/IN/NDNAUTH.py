@@ -63,10 +63,10 @@ class NDNAUTH(dns.rdata.Rdata):
     from_text = classmethod(from_text)
 
     def to_wire(self, file, compress = None, origin = None):
-        file.write(self.zoneName.get_ccnb())
+        file.write(self.zoneName.toWire ())
 
     def from_wire(cls, rdclass, rdtype, wire, current, rdlen, origin = None):
-        zoneName = ndn.Name (ccnb_buffer = wire[current : current + rdlen])
+        zoneName = ndn.Name.fromWire (wire[current : current + rdlen])
         return cls(rdclass, rdtype, zoneName)
 
     from_wire = classmethod(from_wire)

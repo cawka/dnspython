@@ -63,10 +63,10 @@ class NDNCERTSEQ(dns.rdata.Rdata):
     from_text = classmethod(from_text)
 
     def to_wire(self, file, compress = None, origin = None):
-        file.write(self.seq.get_ccnb())
+        file.write(self.seq.toWire ())
 
     def from_wire(cls, rdclass, rdtype, wire, current, rdlen, origin = None):
-        seq = ndn.Name (ccnb_buffer = wire[current : current + rdlen])
+        seq = ndn.Name.fromWire (wire[current : current + rdlen])
         return cls(rdclass, rdtype, seq)
 
     from_wire = classmethod(from_wire)

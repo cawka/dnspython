@@ -38,7 +38,6 @@ import struct
 import dns.exception
 import dns.rdata
 import dns.name
-import ndn
 
 import base64
 

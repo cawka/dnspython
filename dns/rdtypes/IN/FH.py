@@ -65,8 +65,6 @@ class FH(dns.rdata.Rdata):
         priority = tok.get_uint16()
         weight = tok.get_uint16()
         hint = ndn.Name (tok.get_string())
-        if len(hint.get_ccnb ()) > 255:
-            raise dns.exception.SyntaxError("forwarding hint is too long")
         tok.get_eol()
         return cls(rdclass, rdtype, priority, weight, hint)
 
@@ -75,7 +73,7 @@ class FH(dns.rdata.Rdata):
     def to_wire(self, file, compress = None, origin = None):
         two_ints = struct.pack("!HH", self.priority, self.weight)
         file.write(two_ints)
-        file.write(self.hint.get_ccnb())
+        file.write(self.hint.toWire ())
 
     def from_wire(cls, rdclass, rdtype, wire, current, rdlen, origin = None):
         (priority, weight) = struct.unpack('!HH',
@@ -83,7 +81,7 @@ class FH(dns.rdata.Rdata):
         current += 4
         rdlen -= 4
         
-        hint = ndn.Name (ccnb_buffer = wire[current : current + rdlen])
+        hint = ndn.Name.fromWire (wire[current : current + rdlen])
         return cls(rdclass, rdtype, priority, weight, hint)
 
     from_wire = classmethod(from_wire)
