@@ -22,16 +22,16 @@ class Set(object):
     we cannot use sets.Set anyway.  This class implements subset of
     the 2.3 Set interface using a list as the container.
 
-    @ivar items: A list of the items which are in the set
-    @type items: list"""
+    :ivar items: A list of the items which are in the set
+    :type items: list"""
 
     __slots__ = ['items']
 
     def __init__(self, items=None):
         """Initialize the set.
 
-        @param items: the initial set of items
-        @type items: any iterable or None
+        :param items: the initial set of items
+        :type items: any iterable or None
         """
 
         self.items = []
@@ -87,8 +87,8 @@ class Set(object):
     def union_update(self, other):
         """Update the set, adding any elements from other which are not
         already in the set.
-        @param other: the collection of items with which to update the set
-        @type other: Set object
+        :param other: the collection of items with which to update the set
+        :type other: Set object
         """
         if not isinstance(other, Set):
             raise ValueError('other must be a Set instance')
@@ -100,8 +100,8 @@ class Set(object):
     def intersection_update(self, other):
         """Update the set, removing any elements from other which are not
         in both sets.
-        @param other: the collection of items with which to update the set
-        @type other: Set object
+        :param other: the collection of items with which to update the set
+        :type other: Set object
         """
         if not isinstance(other, Set):
             raise ValueError('other must be a Set instance')
@@ -116,8 +116,8 @@ class Set(object):
     def difference_update(self, other):
         """Update the set, removing any elements from other which are in
         the set.
-        @param other: the collection of items with which to update the set
-        @type other: Set object
+        :param other: the collection of items with which to update the set
+        :type other: Set object
         """
         if not isinstance(other, Set):
             raise ValueError('other must be a Set instance')
@@ -130,9 +130,9 @@ class Set(object):
     def union(self, other):
         """Return a new set which is the union of I{self} and I{other}.
 
-        @param other: the other set
-        @type other: Set object
-        @rtype: the same type as I{self}
+        :param other: the other set
+        :type other: Set object
+        :rtype: the same type as I{self}
         """
 
         obj = self._clone()
@@ -142,9 +142,9 @@ class Set(object):
     def intersection(self, other):
         """Return a new set which is the intersection of I{self} and I{other}.
 
-        @param other: the other set
-        @type other: Set object
-        @rtype: the same type as I{self}
+        :param other: the other set
+        :type other: Set object
+        :rtype: the same type as I{self}
         """
 
         obj = self._clone()
@@ -155,9 +155,9 @@ class Set(object):
         """Return a new set which I{self} - I{other}, i.e. the items
         in I{self} which are not also in I{other}.
 
-        @param other: the other set
-        @type other: Set object
-        @rtype: the same type as I{self}
+        :param other: the other set
+        :type other: Set object
+        :rtype: the same type as I{self}
         """
 
         obj = self._clone()
@@ -195,8 +195,8 @@ class Set(object):
     def update(self, other):
         """Update the set, adding any elements from other which are not
         already in the set.
-        @param other: the collection of items with which to update the set
-        @type other: any iterable type"""
+        :param other: the collection of items with which to update the set
+        :type other: any iterable type"""
         for item in other:
             self.add(item)
 
@@ -239,7 +239,7 @@ class Set(object):
     def issubset(self, other):
         """Is I{self} a subset of I{other}?
 
-        @rtype: bool
+        :rtype: bool
         """
 
         if not isinstance(other, Set):
@@ -252,7 +252,7 @@ class Set(object):
     def issuperset(self, other):
         """Is I{self} a superset of I{other}?
 
-        @rtype: bool
+        :rtype: bool
         """
 
         if not isinstance(other, Set):

@@ -15,8 +15,8 @@
 
 """DNS stub resolver.
 
-@var default_resolver: The default resolver object
-@type default_resolver: dns.resolver.Resolver object"""
+:var default_resolver: The default resolver object
+:type default_resolver: dns.resolver.Resolver object"""
 
 import socket
 import sys
@@ -94,20 +94,20 @@ class Answer(object):
     Note that CNAMEs or DNAMEs in the response may mean that answer
     node's name might not be the query name.
 
-    @ivar qname: The query name
-    @type qname: dns.name.Name object
-    @ivar rdtype: The query type
-    @type rdtype: int
-    @ivar rdclass: The query class
-    @type rdclass: int
-    @ivar response: The response message
-    @type response: dns.message.Message object
-    @ivar rrset: The answer
-    @type rrset: dns.rrset.RRset object
-    @ivar expiration: The time when the answer expires
-    @type expiration: float (seconds since the epoch)
-    @ivar canonical_name: The canonical name of the query name
-    @type canonical_name: dns.name.Name object
+    :ivar qname: The query name
+    :type qname: dns.name.Name object
+    :ivar rdtype: The query type
+    :type rdtype: int
+    :ivar rdclass: The query class
+    :type rdclass: int
+    :ivar response: The response message
+    :type response: dns.message.Message object
+    :ivar rrset: The answer
+    :type rrset: dns.rrset.RRset object
+    :ivar expiration: The time when the answer expires
+    :type expiration: float (seconds since the epoch)
+    :ivar canonical_name: The canonical name of the query name
+    :type canonical_name: dns.name.Name object
     """
     def __init__(self, qname, rdtype, rdclass, response,
                  raise_on_no_answer=True):
@@ -200,22 +200,22 @@ class Answer(object):
 class Cache(object):
     """Simple DNS answer cache.
 
-    @ivar data: A dictionary of cached data
-    @type data: dict
-    @ivar cleaning_interval: The number of seconds between cleanings.  The
+    :ivar data: A dictionary of cached data
+    :type data: dict
+    :ivar cleaning_interval: The number of seconds between cleanings.  The
     default is 300 (5 minutes).
-    @type cleaning_interval: float
-    @ivar next_cleaning: The time the cache should next be cleaned (in seconds
+    :type cleaning_interval: float
+    :ivar next_cleaning: The time the cache should next be cleaned (in seconds
     since the epoch.)
-    @type next_cleaning: float
+    :type next_cleaning: float
     """
 
     def __init__(self, cleaning_interval=300.0):
         """Initialize a DNS cache.
 
-        @param cleaning_interval: the number of seconds between periodic
+        :param cleaning_interval: the number of seconds between periodic
         cleanings.  The default is 300.0
-        @type cleaning_interval: float.
+        :type cleaning_interval: float.
         """
 
         self.data = {}
@@ -240,10 +240,10 @@ class Cache(object):
     def get(self, key):
         """Get the answer associated with I{key}.  Returns None if
         no answer is cached for the key.
-        @param key: the key
-        @type key: (dns.name.Name, int, int) tuple whose values are the
+        :param key: the key
+        :type key: (dns.name.Name, int, int) tuple whose values are the
         query name, rdtype, and rdclass.
-        @rtype: dns.resolver.Answer object or None
+        :rtype: dns.resolver.Answer object or None
         """
 
         try:
@@ -258,11 +258,11 @@ class Cache(object):
 
     def put(self, key, value):
         """Associate key and value in the cache.
-        @param key: the key
-        @type key: (dns.name.Name, int, int) tuple whose values are the
+        :param key: the key
+        :type key: (dns.name.Name, int, int) tuple whose values are the
         query name, rdtype, and rdclass.
-        @param value: The answer being cached
-        @type value: dns.resolver.Answer object
+        :param value: The answer being cached
+        :type value: dns.resolver.Answer object
         """
 
         try:
@@ -278,8 +278,8 @@ class Cache(object):
         If I{key} is specified, only that item is flushed.  Otherwise
         the entire cache is flushed.
 
-        @param key: the key to flush
-        @type key: (dns.name.Name, int, int) tuple or None
+        :param key: the key to flush
+        :type key: (dns.name.Name, int, int) tuple or None
         """
 
         try:
@@ -327,19 +327,19 @@ class LRUCache(object):
     it is full, the least-recently used node is removed to make space
     for a new one.
 
-    @ivar data: A dictionary of cached data
-    @type data: dict
-    @ivar sentinel: sentinel node for circular doubly linked list of nodes
-    @type sentinel: LRUCacheNode object
-    @ivar max_size: The maximum number of nodes
-    @type max_size: int
+    :ivar data: A dictionary of cached data
+    :type data: dict
+    :ivar sentinel: sentinel node for circular doubly linked list of nodes
+    :type sentinel: LRUCacheNode object
+    :ivar max_size: The maximum number of nodes
+    :type max_size: int
     """
 
     def __init__(self, max_size=100000):
         """Initialize a DNS cache.
 
-        @param max_size: The maximum number of nodes to cache; the default is 100000.  Must be > 1.
-        @type max_size: int
+        :param max_size: The maximum number of nodes to cache; the default is 100000.  Must be > 1.
+        :type max_size: int
         """
         self.data = {}
         self.set_max_size(max_size)
@@ -354,10 +354,10 @@ class LRUCache(object):
     def get(self, key):
         """Get the answer associated with I{key}.  Returns None if
         no answer is cached for the key.
-        @param key: the key
-        @type key: (dns.name.Name, int, int) tuple whose values are the
+        :param key: the key
+        :type key: (dns.name.Name, int, int) tuple whose values are the
         query name, rdtype, and rdclass.
-        @rtype: dns.resolver.Answer object or None
+        :rtype: dns.resolver.Answer object or None
         """
         try:
             self.lock.acquire()
@@ -377,11 +377,11 @@ class LRUCache(object):
 
     def put(self, key, value):
         """Associate key and value in the cache.
-        @param key: the key
-        @type key: (dns.name.Name, int, int) tuple whose values are the
+        :param key: the key
+        :type key: (dns.name.Name, int, int) tuple whose values are the
         query name, rdtype, and rdclass.
-        @param value: The answer being cached
-        @type value: dns.resolver.Answer object
+        :param value: The answer being cached
+        :type value: dns.resolver.Answer object
         """
         try:
             self.lock.acquire()
@@ -405,8 +405,8 @@ class LRUCache(object):
         If I{key} is specified, only that item is flushed.  Otherwise
         the entire cache is flushed.
 
-        @param key: the key to flush
-        @type key: (dns.name.Name, int, int) tuple or None
+        :param key: the key to flush
+        :type key: (dns.name.Name, int, int) tuple or None
         """
         try:
             self.lock.acquire()
@@ -429,57 +429,57 @@ class LRUCache(object):
 class Resolver(object):
     """DNS stub resolver
 
-    @ivar domain: The domain of this host
-    @type domain: dns.name.Name object
-    @ivar nameservers: A list of nameservers to query.  Each nameserver is
+    :ivar domain: The domain of this host
+    :type domain: dns.name.Name object
+    :ivar nameservers: A list of nameservers to query.  Each nameserver is
     a string which contains the IP address of a nameserver.
-    @type nameservers: list of strings
-    @ivar search: The search list.  If the query name is a relative name,
+    :type nameservers: list of strings
+    :ivar search: The search list.  If the query name is a relative name,
     the resolver will construct an absolute query name by appending the search
     names one by one to the query name.
-    @type search: list of dns.name.Name objects
-    @ivar port: The port to which to send queries.  The default is 53.
-    @type port: int
-    @ivar timeout: The number of seconds to wait for a response from a
+    :type search: list of dns.name.Name objects
+    :ivar port: The port to which to send queries.  The default is 53.
+    :type port: int
+    :ivar timeout: The number of seconds to wait for a response from a
     server, before timing out.
-    @type timeout: float
-    @ivar lifetime: The total number of seconds to spend trying to get an
+    :type timeout: float
+    :ivar lifetime: The total number of seconds to spend trying to get an
     answer to the question.  If the lifetime expires, a Timeout exception
     will occur.
-    @type lifetime: float
-    @ivar keyring: The TSIG keyring to use.  The default is None.
-    @type keyring: dict
-    @ivar keyname: The TSIG keyname to use.  The default is None.
-    @type keyname: dns.name.Name object
-    @ivar keyalgorithm: The TSIG key algorithm to use.  The default is
+    :type lifetime: float
+    :ivar keyring: The TSIG keyring to use.  The default is None.
+    :type keyring: dict
+    :ivar keyname: The TSIG keyname to use.  The default is None.
+    :type keyname: dns.name.Name object
+    :ivar keyalgorithm: The TSIG key algorithm to use.  The default is
     dns.tsig.default_algorithm.
-    @type keyalgorithm: string
-    @ivar edns: The EDNS level to use.  The default is -1, no Edns.
-    @type edns: int
-    @ivar ednsflags: The EDNS flags
-    @type ednsflags: int
-    @ivar payload: The EDNS payload size.  The default is 0.
-    @type payload: int
-    @ivar flags: The message flags to use.  The default is None (i.e. not overwritten)
-    @type flags: int
-    @ivar cache: The cache to use.  The default is None.
-    @type cache: dns.resolver.Cache object
-    @ivar retry_servfail: should we retry a nameserver if it says SERVFAIL?
+    :type keyalgorithm: string
+    :ivar edns: The EDNS level to use.  The default is -1, no Edns.
+    :type edns: int
+    :ivar ednsflags: The EDNS flags
+    :type ednsflags: int
+    :ivar payload: The EDNS payload size.  The default is 0.
+    :type payload: int
+    :ivar flags: The message flags to use.  The default is None (i.e. not overwritten)
+    :type flags: int
+    :ivar cache: The cache to use.  The default is None.
+    :type cache: dns.resolver.Cache object
+    :ivar retry_servfail: should we retry a nameserver if it says SERVFAIL?
     The default is 'false'.
-    @type retry_servfail: bool
+    :type retry_servfail: bool
     """
     def __init__(self, filename='/etc/resolv.conf', configure=True):
         """Initialize a resolver instance.
 
-        @param filename: The filename of a configuration file in
+        :param filename: The filename of a configuration file in
         standard /etc/resolv.conf format.  This parameter is meaningful
         only when I{configure} is true and the platform is POSIX.
-        @type filename: string or file object
-        @param configure: If True (the default), the resolver instance
+        :type filename: string or file object
+        :param configure: If True (the default), the resolver instance
         is configured in the normal fashion for the operating system
         the resolver is running on.  (I.e. a /etc/resolv.conf file on
         POSIX systems and from the registry on Windows systems.)
-        @type configure: bool"""
+        :type configure: bool"""
 
         self.reset()
         if configure:
@@ -743,29 +743,29 @@ class Resolver(object):
         of the appropriate type.  E.g. For I{rdtype} the integer 2 and the
         the string 'NS' both mean to query for records with DNS rdata type NS.
 
-        @param qname: the query name
-        @type qname: dns.name.Name object or string
-        @param rdtype: the query type
-        @type rdtype: int or string
-        @param rdclass: the query class
-        @type rdclass: int or string
-        @param tcp: use TCP to make the query (default is False).
-        @type tcp: bool
-        @param source: bind to this IP address (defaults to machine default IP).
-        @type source: IP address in dotted quad notation
-        @param raise_on_no_answer: raise NoAnswer if there's no answer
+        :param qname: the query name
+        :type qname: dns.name.Name object or string
+        :param rdtype: the query type
+        :type rdtype: int or string
+        :param rdclass: the query class
+        :type rdclass: int or string
+        :param tcp: use TCP to make the query (default is False).
+        :type tcp: bool
+        :param source: bind to this IP address (defaults to machine default IP).
+        :type source: IP address in dotted quad notation
+        :param raise_on_no_answer: raise NoAnswer if there's no answer
         (defaults is True).
-        @type raise_on_no_answer: bool
-        @param source_port: The port from which to send the message.
+        :type raise_on_no_answer: bool
+        :param source_port: The port from which to send the message.
         The default is 0.
-        @type source_port: int
-        @rtype: dns.resolver.Answer instance
-        @raises Timeout: no answers could be found in the specified lifetime
-        @raises NXDOMAIN: the query name does not exist
-        @raises YXDOMAIN: the query name is too long after DNAME substitution
-        @raises NoAnswer: the response did not contain an answer and
+        :type source_port: int
+        :rtype: dns.resolver.Answer instance
+        :raises Timeout: no answers could be found in the specified lifetime
+        :raises NXDOMAIN: the query name does not exist
+        :raises YXDOMAIN: the query name is too long after DNAME substitution
+        :raises NoAnswer: the response did not contain an answer and
         raise_on_no_answer is True.
-        @raises NoNameservers: no non-broken nameservers are available to
+        :raises NoNameservers: no non-broken nameservers are available to
         answer the question."""
 
         if isinstance(qname, (str, unicode)):
@@ -911,17 +911,17 @@ class Resolver(object):
                  algorithm=dns.tsig.default_algorithm):
         """Add a TSIG signature to the query.
 
-        @param keyring: The TSIG keyring to use; defaults to None.
-        @type keyring: dict
-        @param keyname: The name of the TSIG key to use; defaults to None.
+        :param keyring: The TSIG keyring to use; defaults to None.
+        :type keyring: dict
+        :param keyname: The name of the TSIG key to use; defaults to None.
         The key must be defined in the keyring.  If a keyring is specified
         but a keyname is not, then the key used will be the first key in the
         keyring.  Note that the order of keys in a dictionary is not defined,
         so applications should supply a keyname when a keyring is used, unless
         they know the keyring contains only one key.
-        @param algorithm: The TSIG key algorithm to use.  The default
+        :param algorithm: The TSIG key algorithm to use.  The default
         is dns.tsig.default_algorithm.
-        @type algorithm: string"""
+        :type algorithm: string"""
         self.keyring = keyring
         if keyname is None:
             self.keyname = self.keyring.keys()[0]
@@ -932,12 +932,12 @@ class Resolver(object):
     def use_edns(self, edns, ednsflags, payload):
         """Configure Edns.
 
-        @param edns: The EDNS level to use.  The default is -1, no Edns.
-        @type edns: int
-        @param ednsflags: The EDNS flags
-        @type ednsflags: int
-        @param payload: The EDNS payload size.  The default is 0.
-        @type payload: int"""
+        :param edns: The EDNS level to use.  The default is -1, no Edns.
+        :type edns: int
+        :param ednsflags: The EDNS flags
+        :type ednsflags: int
+        :param payload: The EDNS payload size.  The default is 0.
+        :type payload: int"""
 
         if edns is None:
             edns = -1
@@ -948,8 +948,8 @@ class Resolver(object):
     def set_flags(self, flags):
         """Overrides the default flags with your own
 
-        @param flags: The flags to overwrite the default with
-        @type flags: int"""
+        :param flags: The flags to overwrite the default with
+        :type flags: int"""
         self.flags = flags
 
 default_resolver = None
@@ -976,15 +976,15 @@ def query(qname, rdtype=dns.rdatatype.A, rdclass=dns.rdataclass.IN,
 def zone_for_name(name, rdclass=dns.rdataclass.IN, tcp=False, resolver=None):
     """Find the name of the zone which contains the specified name.
 
-    @param name: the query name
-    @type name: absolute dns.name.Name object or string
-    @param rdclass: The query class
-    @type rdclass: int
-    @param tcp: use TCP to make the query (default is False).
-    @type tcp: bool
-    @param resolver: the resolver to use
-    @type resolver: dns.resolver.Resolver object or None
-    @rtype: dns.name.Name"""
+    :param name: the query name
+    :type name: absolute dns.name.Name object or string
+    :param rdclass: The query class
+    :type rdclass: int
+    :param tcp: use TCP to make the query (default is False).
+    :type tcp: bool
+    :param resolver: the resolver to use
+    :type resolver: dns.resolver.Resolver object or None
+    :rtype: dns.name.Name"""
 
     if isinstance(name, (str, unicode)):
         name = dns.name.from_text(name, dns.name.root)
@@ -1211,8 +1211,8 @@ def override_system_resolver(resolver=None):
     The resolver to use may be specified; if it's not, the default
     resolver will be used.
 
-    @param resolver: the resolver to use
-    @type resolver: dns.resolver.Resolver object or None
+    :param resolver: the resolver to use
+    :type resolver: dns.resolver.Resolver object or None
     """
     if resolver is None:
         resolver = get_default_resolver()

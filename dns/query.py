@@ -47,14 +47,14 @@ def _compute_expiration(timeout):
 
 def _poll_for(fd, readable, writable, error, timeout):
     """Poll polling backend.
-    @param fd: File descriptor
-    @type fd: int
-    @param readable: Whether to wait for readability
-    @type readable: bool
-    @param writable: Whether to wait for writability
-    @type writable: bool
-    @param timeout: Deadline timeout (expiration time, in seconds)
-    @type timeout: float
+    :param fd: File descriptor
+    :type fd: int
+    :param readable: Whether to wait for readability
+    :type readable: bool
+    :param writable: Whether to wait for writability
+    :type writable: bool
+    :param timeout: Deadline timeout (expiration time, in seconds)
+    :type timeout: float
     @return True on success, False on timeout
     """
     event_mask = 0
@@ -77,14 +77,14 @@ def _poll_for(fd, readable, writable, error, timeout):
 
 def _select_for(fd, readable, writable, error, timeout):
     """Select polling backend.
-    @param fd: File descriptor
-    @type fd: int
-    @param readable: Whether to wait for readability
-    @type readable: bool
-    @param writable: Whether to wait for writability
-    @type writable: bool
-    @param timeout: Deadline timeout (expiration time, in seconds)
-    @type timeout: float
+    :param fd: File descriptor
+    :type fd: int
+    :param readable: Whether to wait for readability
+    :type readable: bool
+    :param writable: Whether to wait for writability
+    :type writable: bool
+    :param timeout: Deadline timeout (expiration time, in seconds)
+    :type timeout: float
     @return True on success, False on timeout
     """
     rset, wset, xset = [], [], []
@@ -176,30 +176,30 @@ def udp(q, where, timeout=None, port=53, af=None, source=None, source_port=0,
         ignore_unexpected=False, one_rr_per_rrset=False):
     """Return the response obtained after sending a query via UDP.
 
-    @param q: the query
-    @type q: dns.message.Message
-    @param where: where to send the message
-    @type where: string containing an IPv4 or IPv6 address
-    @param timeout: The number of seconds to wait before the query times out.
+    :param q: the query
+    :type q: dns.message.Message
+    :param where: where to send the message
+    :type where: string containing an IPv4 or IPv6 address
+    :param timeout: The number of seconds to wait before the query times out.
     If None, the default, wait forever.
-    @type timeout: float
-    @param port: The port to which to send the message.  The default is 53.
-    @type port: int
-    @param af: the address family to use.  The default is None, which
+    :type timeout: float
+    :param port: The port to which to send the message.  The default is 53.
+    :type port: int
+    :param af: the address family to use.  The default is None, which
     causes the address family to use to be inferred from the form of of where.
     If the inference attempt fails, AF_INET is used.
-    @type af: int
-    @rtype: dns.message.Message object
-    @param source: source address.  The default is the wildcard address.
-    @type source: string
-    @param source_port: The port from which to send the message.
+    :type af: int
+    :rtype: dns.message.Message object
+    :param source: source address.  The default is the wildcard address.
+    :type source: string
+    :param source_port: The port from which to send the message.
     The default is 0.
-    @type source_port: int
-    @param ignore_unexpected: If True, ignore responses from unexpected
+    :type source_port: int
+    :param ignore_unexpected: If True, ignore responses from unexpected
     sources.  The default is False.
-    @type ignore_unexpected: bool
-    @param one_rr_per_rrset: Put each RR into its own RRset
-    @type one_rr_per_rrset: bool
+    :type ignore_unexpected: bool
+    :param one_rr_per_rrset: Put each RR into its own RRset
+    :type one_rr_per_rrset: bool
     """
 
     wire = q.to_wire()
@@ -273,27 +273,27 @@ def tcp(q, where, timeout=None, port=53, af=None, source=None, source_port=0,
         one_rr_per_rrset=False):
     """Return the response obtained after sending a query via TCP.
 
-    @param q: the query
-    @type q: dns.message.Message object
-    @param where: where to send the message
-    @type where: string containing an IPv4 or IPv6 address
-    @param timeout: The number of seconds to wait before the query times out.
+    :param q: the query
+    :type q: dns.message.Message object
+    :param where: where to send the message
+    :type where: string containing an IPv4 or IPv6 address
+    :param timeout: The number of seconds to wait before the query times out.
     If None, the default, wait forever.
-    @type timeout: float
-    @param port: The port to which to send the message.  The default is 53.
-    @type port: int
-    @param af: the address family to use.  The default is None, which
+    :type timeout: float
+    :param port: The port to which to send the message.  The default is 53.
+    :type port: int
+    :param af: the address family to use.  The default is None, which
     causes the address family to use to be inferred from the form of of where.
     If the inference attempt fails, AF_INET is used.
-    @type af: int
-    @rtype: dns.message.Message object
-    @param source: source address.  The default is the wildcard address.
-    @type source: string
-    @param source_port: The port from which to send the message.
+    :type af: int
+    :rtype: dns.message.Message object
+    :param source: source address.  The default is the wildcard address.
+    :type source: string
+    :param source_port: The port from which to send the message.
     The default is 0.
-    @type source_port: int
-    @param one_rr_per_rrset: Put each RR into its own RRset
-    @type one_rr_per_rrset: bool
+    :type source_port: int
+    :param one_rr_per_rrset: Put each RR into its own RRset
+    :type one_rr_per_rrset: bool
     """
 
     wire = q.to_wire()
@@ -331,51 +331,51 @@ def xfr(where, zone, rdtype=dns.rdatatype.AXFR, rdclass=dns.rdataclass.IN,
         use_udp=False, keyalgorithm=dns.tsig.default_algorithm):
     """Return a generator for the responses to a zone transfer.
 
-    @param where: where to send the message
-    @type where: string containing an IPv4 or IPv6 address
-    @param zone: The name of the zone to transfer
-    @type zone: dns.name.Name object or string
-    @param rdtype: The type of zone transfer.  The default is
+    :param where: where to send the message
+    :type where: string containing an IPv4 or IPv6 address
+    :param zone: The name of the zone to transfer
+    :type zone: dns.name.Name object or string
+    :param rdtype: The type of zone transfer.  The default is
     dns.rdatatype.AXFR.
-    @type rdtype: int or string
-    @param rdclass: The class of the zone transfer.  The default is
+    :type rdtype: int or string
+    :param rdclass: The class of the zone transfer.  The default is
     dns.rdataclass.IN.
-    @type rdclass: int or string
-    @param timeout: The number of seconds to wait for each response message.
+    :type rdclass: int or string
+    :param timeout: The number of seconds to wait for each response message.
     If None, the default, wait forever.
-    @type timeout: float
-    @param port: The port to which to send the message.  The default is 53.
-    @type port: int
-    @param keyring: The TSIG keyring to use
-    @type keyring: dict
-    @param keyname: The name of the TSIG key to use
-    @type keyname: dns.name.Name object or string
-    @param relativize: If True, all names in the zone will be relativized to
+    :type timeout: float
+    :param port: The port to which to send the message.  The default is 53.
+    :type port: int
+    :param keyring: The TSIG keyring to use
+    :type keyring: dict
+    :param keyname: The name of the TSIG key to use
+    :type keyname: dns.name.Name object or string
+    :param relativize: If True, all names in the zone will be relativized to
     the zone origin.  It is essential that the relativize setting matches
     the one specified to dns.zone.from_xfr().
-    @type relativize: bool
-    @param af: the address family to use.  The default is None, which
+    :type relativize: bool
+    :param af: the address family to use.  The default is None, which
     causes the address family to use to be inferred from the form of of where.
     If the inference attempt fails, AF_INET is used.
-    @type af: int
-    @param lifetime: The total number of seconds to spend doing the transfer.
+    :type af: int
+    :param lifetime: The total number of seconds to spend doing the transfer.
     If None, the default, then there is no limit on the time the transfer may
     take.
-    @type lifetime: float
-    @rtype: generator of dns.message.Message objects.
-    @param source: source address.  The default is the wildcard address.
-    @type source: string
-    @param source_port: The port from which to send the message.
+    :type lifetime: float
+    :rtype: generator of dns.message.Message objects.
+    :param source: source address.  The default is the wildcard address.
+    :type source: string
+    :param source_port: The port from which to send the message.
     The default is 0.
-    @type source_port: int
-    @param serial: The SOA serial number to use as the base for an IXFR diff
+    :type source_port: int
+    :param serial: The SOA serial number to use as the base for an IXFR diff
     sequence (only meaningful if rdtype == dns.rdatatype.IXFR).
-    @type serial: int
-    @param use_udp: Use UDP (only meaningful for IXFR)
-    @type use_udp: bool
-    @param keyalgorithm: The TSIG algorithm to use; defaults to
+    :type serial: int
+    :param use_udp: Use UDP (only meaningful for IXFR)
+    :type use_udp: bool
+    :param keyalgorithm: The TSIG algorithm to use; defaults to
     dns.tsig.default_algorithm
-    @type keyalgorithm: string
+    :type keyalgorithm: string
     """
 
     if isinstance(zone, (str, unicode)):

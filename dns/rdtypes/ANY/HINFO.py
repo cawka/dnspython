@@ -20,10 +20,10 @@ import dns.tokenizer
 class HINFO(dns.rdata.Rdata):
     """HINFO record
 
-    @ivar cpu: the CPU type
-    @type cpu: string
-    @ivar os: the OS type
-    @type os: string
+    :ivar cpu: the CPU type
+    :type cpu: string
+    :ivar os: the OS type
+    :type os: string
     @see: RFC 1035"""
 
     __slots__ = ['cpu', 'os']

@@ -50,40 +50,40 @@ class Renderer(object):
         r.add_tsig(keyname, secret, 300, 1, 0, '', request_mac)
         wire = r.get_wire()
 
-    @ivar output: where rendering is written
-    @type output: cStringIO.StringIO object
-    @ivar id: the message id
-    @type id: int
-    @ivar flags: the message flags
-    @type flags: int
-    @ivar max_size: the maximum size of the message
-    @type max_size: int
-    @ivar origin: the origin to use when rendering relative names
-    @type origin: dns.name.Name object
-    @ivar compress: the compression table
-    @type compress: dict
-    @ivar section: the section currently being rendered
-    @type section: int (dns.renderer.QUESTION, dns.renderer.ANSWER,
+    :ivar output: where rendering is written
+    :type output: cStringIO.StringIO object
+    :ivar id: the message id
+    :type id: int
+    :ivar flags: the message flags
+    :type flags: int
+    :ivar max_size: the maximum size of the message
+    :type max_size: int
+    :ivar origin: the origin to use when rendering relative names
+    :type origin: dns.name.Name object
+    :ivar compress: the compression table
+    :type compress: dict
+    :ivar section: the section currently being rendered
+    :type section: int (dns.renderer.QUESTION, dns.renderer.ANSWER,
     dns.renderer.AUTHORITY, or dns.renderer.ADDITIONAL)
-    @ivar counts: list of the number of RRs in each section
-    @type counts: int list of length 4
-    @ivar mac: the MAC of the rendered message (if TSIG was used)
-    @type mac: string
+    :ivar counts: list of the number of RRs in each section
+    :type counts: int list of length 4
+    :ivar mac: the MAC of the rendered message (if TSIG was used)
+    :type mac: string
     """
 
     def __init__(self, id=None, flags=0, max_size=65535, origin=None):
         """Initialize a new renderer.
 
-        @param id: the message id
-        @type id: int
-        @param flags: the DNS message flags
-        @type flags: int
-        @param max_size: the maximum message size; the default is 65535.
+        :param id: the message id
+        :type id: int
+        :param flags: the DNS message flags
+        :type flags: int
+        :param max_size: the maximum message size; the default is 65535.
         If rendering results in a message greater than I{max_size},
         then L{dns.exception.TooBig} will be raised.
-        @type max_size: int
-        @param origin: the origin to use when rendering relative names
-        @type origin: dns.name.Namem or None.
+        :type max_size: int
+        :param origin: the origin to use when rendering relative names
+        :type origin: dns.name.Namem or None.
         """
 
         self.output = cStringIO.StringIO()
@@ -105,8 +105,8 @@ class Renderer(object):
         compression table entries that pointed beyond the truncation
         point.
 
-        @param where: the offset
-        @type where: int
+        :param where: the offset
+        :type where: int
         """
 
         self.output.seek(where)
@@ -124,9 +124,9 @@ class Renderer(object):
         Sections must be rendered order: QUESTION, ANSWER, AUTHORITY,
         ADDITIONAL.  Sections may be empty.
 
-        @param section: the section
-        @type section: int
-        @raises dns.exception.FormError: an attempt was made to set
+        :param section: the section
+        :type section: int
+        :raises dns.exception.FormError: an attempt was made to set
         a section value less than the current section.
         """
 
@@ -138,12 +138,12 @@ class Renderer(object):
     def add_question(self, qname, rdtype, rdclass=dns.rdataclass.IN):
         """Add a question to the message.
 
-        @param qname: the question name
-        @type qname: dns.name.Name
-        @param rdtype: the question rdata type
-        @type rdtype: int
-        @param rdclass: the question rdata class
-        @type rdclass: int
+        :param qname: the question name
+        :type qname: dns.name.Name
+        :param rdtype: the question rdata type
+        :type rdtype: int
+        :param rdclass: the question rdata class
+        :type rdclass: int
         """
 
         self._set_section(QUESTION)
@@ -162,10 +162,10 @@ class Renderer(object):
         Any keyword arguments are passed on to the rdataset's to_wire()
         routine.
 
-        @param section: the section
-        @type section: int
-        @param rrset: the rrset
-        @type rrset: dns.rrset.RRset object
+        :param section: the section
+        :type section: int
+        :param rrset: the rrset
+        :type rrset: dns.rrset.RRset object
         """
 
         self._set_section(section)
@@ -184,12 +184,12 @@ class Renderer(object):
         Any keyword arguments are passed on to the rdataset's to_wire()
         routine.
 
-        @param section: the section
-        @type section: int
-        @param name: the owner name
-        @type name: dns.name.Name object
-        @param rdataset: the rdataset
-        @type rdataset: dns.rdataset.Rdataset object
+        :param section: the section
+        :type section: int
+        :param name: the owner name
+        :type name: dns.name.Name object
+        :param rdataset: the rdataset
+        :type rdataset: dns.rdataset.Rdataset object
         """
 
         self._set_section(section)
@@ -205,15 +205,15 @@ class Renderer(object):
     def add_edns(self, edns, ednsflags, payload, options=None):
         """Add an EDNS OPT record to the message.
 
-        @param edns: The EDNS level to use.
-        @type edns: int
-        @param ednsflags: EDNS flag values.
-        @type ednsflags: int
-        @param payload: The EDNS sender's payload field, which is the maximum
+        :param edns: The EDNS level to use.
+        :type edns: int
+        :param ednsflags: EDNS flag values.
+        :type ednsflags: int
+        :param payload: The EDNS sender's payload field, which is the maximum
         size of UDP datagram the sender can handle.
-        @type payload: int
-        @param options: The EDNS options list
-        @type options: list of dns.edns.Option instances
+        :type payload: int
+        :param options: The EDNS options list
+        :type options: list of dns.edns.Option instances
         @see: RFC 2671
         """
 
@@ -253,23 +253,23 @@ class Renderer(object):
                  request_mac, algorithm=dns.tsig.default_algorithm):
         """Add a TSIG signature to the message.
 
-        @param keyname: the TSIG key name
-        @type keyname: dns.name.Name object
-        @param secret: the secret to use
-        @type secret: string
-        @param fudge: TSIG time fudge
-        @type fudge: int
-        @param id: the message id to encode in the tsig signature
-        @type id: int
-        @param tsig_error: TSIG error code; default is 0.
-        @type tsig_error: int
-        @param other_data: TSIG other data.
-        @type other_data: string
-        @param request_mac: This message is a response to the request which
+        :param keyname: the TSIG key name
+        :type keyname: dns.name.Name object
+        :param secret: the secret to use
+        :type secret: string
+        :param fudge: TSIG time fudge
+        :type fudge: int
+        :param id: the message id to encode in the tsig signature
+        :type id: int
+        :param tsig_error: TSIG error code; default is 0.
+        :type tsig_error: int
+        :param other_data: TSIG other data.
+        :type other_data: string
+        :param request_mac: This message is a response to the request which
         had the specified MAC.
-        @type request_mac: string
-        @param algorithm: the TSIG algorithm to use
-        @type algorithm: dns.name.Name object
+        :type request_mac: string
+        :param algorithm: the TSIG algorithm to use
+        :type algorithm: dns.name.Name object
         """
 
         self._set_section(ADDITIONAL)
@@ -319,7 +319,7 @@ class Renderer(object):
     def get_wire(self):
         """Return the wire format message.
 
-        @rtype: string
+        :rtype: string
         """
 
         return self.output.getvalue()

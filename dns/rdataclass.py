@@ -15,13 +15,13 @@
 
 """DNS Rdata Classes.
 
-@var _by_text: The rdata class textual name to value mapping
-@type _by_text: dict
-@var _by_value: The rdata class value to textual name mapping
-@type _by_value: dict
-@var _metaclasses: If an rdataclass is a metaclass, there will be a mapping
+:var _by_text: The rdata class textual name to value mapping
+:type _by_text: dict
+:var _by_value: The rdata class value to textual name mapping
+:type _by_value: dict
+:var _metaclasses: If an rdataclass is a metaclass, there will be a mapping
 whose key is the rdatatype value and whose value is True in this dictionary.
-@type _metaclasses: dict"""
+:type _metaclasses: dict"""
 
 import re
 
@@ -71,11 +71,11 @@ class UnknownRdataclass(dns.exception.DNSException):
 
 def from_text(text):
     """Convert text into a DNS rdata class value.
-    @param text: the text
-    @type text: string
-    @rtype: int
-    @raises dns.rdataclass.UnknownRdataclass: the class is unknown
-    @raises ValueError: the rdata class value is not >= 0 and <= 65535
+    :param text: the text
+    :type text: string
+    :rtype: int
+    :raises dns.rdataclass.UnknownRdataclass: the class is unknown
+    :raises ValueError: the rdata class value is not >= 0 and <= 65535
     """
 
     value = _by_text.get(text.upper())
@@ -90,10 +90,10 @@ def from_text(text):
 
 def to_text(value):
     """Convert a DNS rdata class to text.
-    @param value: the rdata class value
-    @type value: int
-    @rtype: string
-    @raises ValueError: the rdata class value is not >= 0 and <= 65535
+    :param value: the rdata class value
+    :type value: int
+    :rtype: string
+    :raises ValueError: the rdata class value is not >= 0 and <= 65535
     """
 
     if value < 0 or value > 65535:
@@ -105,9 +105,9 @@ def to_text(value):
 
 def is_metaclass(rdclass):
     """True if the class is a metaclass.
-    @param rdclass: the rdata class
-    @type rdclass: int
-    @rtype: bool"""
+    :param rdclass: the rdata class
+    :type rdclass: int
+    :rtype: bool"""
 
     if _metaclasses.has_key(rdclass):
         return True

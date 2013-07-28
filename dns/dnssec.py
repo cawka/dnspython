@@ -72,7 +72,7 @@ _algorithm_by_value = dict([(y, x) for x, y in _algorithm_by_text.iteritems()])
 
 def algorithm_from_text(text):
     """Convert text into a DNSSEC algorithm value
-    @rtype: int"""
+    :rtype: int"""
 
     value = _algorithm_by_text.get(text.upper())
     if value is None:
@@ -81,7 +81,7 @@ def algorithm_from_text(text):
 
 def algorithm_to_text(value):
     """Convert a DNSSEC algorithm value to text
-    @rtype: string"""
+    :rtype: string"""
 
     text = _algorithm_by_value.get(value)
     if text is None:
@@ -201,18 +201,18 @@ def _validate_rrsig(rrset, rrsig, keys, origin=None, now=None):
     The owner name of the rrsig is assumed to be the same as the owner name
     of the rrset.
 
-    @param rrset: The RRset to validate
-    @type rrset: dns.rrset.RRset or (dns.name.Name, dns.rdataset.Rdataset)
+    :param rrset: The RRset to validate
+    :type rrset: dns.rrset.RRset or (dns.name.Name, dns.rdataset.Rdataset)
     tuple
-    @param rrsig: The signature rdata
-    @type rrsig: dns.rrset.Rdata
-    @param keys: The key dictionary.
-    @type keys: a dictionary keyed by dns.name.Name with node or rdataset values
-    @param origin: The origin to use for relative names
-    @type origin: dns.name.Name or None
-    @param now: The time to use when validating the signatures.  The default
+    :param rrsig: The signature rdata
+    :type rrsig: dns.rrset.Rdata
+    :param keys: The key dictionary.
+    :type keys: a dictionary keyed by dns.name.Name with node or rdataset values
+    :param origin: The origin to use for relative names
+    :type origin: dns.name.Name or None
+    :param now: The time to use when validating the signatures.  The default
     is the current time.
-    @type now: int
+    :type now: int
     """
 
     if isinstance(origin, (str, unicode)):
@@ -317,19 +317,19 @@ def _validate_rrsig(rrset, rrsig, keys, origin=None, now=None):
 def _validate(rrset, rrsigset, keys, origin=None, now=None):
     """Validate an RRset
 
-    @param rrset: The RRset to validate
-    @type rrset: dns.rrset.RRset or (dns.name.Name, dns.rdataset.Rdataset)
+    :param rrset: The RRset to validate
+    :type rrset: dns.rrset.RRset or (dns.name.Name, dns.rdataset.Rdataset)
     tuple
-    @param rrsigset: The signature RRset
-    @type rrsigset: dns.rrset.RRset or (dns.name.Name, dns.rdataset.Rdataset)
+    :param rrsigset: The signature RRset
+    :type rrsigset: dns.rrset.RRset or (dns.name.Name, dns.rdataset.Rdataset)
     tuple
-    @param keys: The key dictionary.
-    @type keys: a dictionary keyed by dns.name.Name with node or rdataset values
-    @param origin: The origin to use for relative names
-    @type origin: dns.name.Name or None
-    @param now: The time to use when validating the signatures.  The default
+    :param keys: The key dictionary.
+    :type keys: a dictionary keyed by dns.name.Name with node or rdataset values
+    :param origin: The origin to use for relative names
+    :type origin: dns.name.Name or None
+    :param now: The time to use when validating the signatures.  The default
     is the current time.
-    @type now: int
+    :type now: int
     """
 
     if isinstance(origin, (str, unicode)):

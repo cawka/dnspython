@@ -22,8 +22,8 @@ import dns.tokenizer
 class TXTBase(dns.rdata.Rdata):
     """Base class for rdata that is like a TXT record
 
-    @ivar strings: the text strings
-    @type strings: list of string
+    :ivar strings: the text strings
+    :type strings: list of string
     @see: RFC 1035"""
 
     __slots__ = ['strings']

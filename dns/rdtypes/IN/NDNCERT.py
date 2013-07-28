@@ -45,8 +45,8 @@ import base64
 class NDNCERT(dns.rdata.Rdata):
     """NDNCERT record
 
-    @ivar cert: bits of NDN certificate
-    @type cert: DER encoded bits of NDN certificate (e.g., bits of public key)"""
+    :ivar cert: bits of NDN certificate
+    :type cert: DER encoded bits of NDN certificate (e.g., bits of public key)"""
 
     __slots__ = ['cert']
 

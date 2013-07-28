@@ -15,10 +15,9 @@
 
 """DNS Names.
 
-@var root: The DNS root name.
-@type root: dns.name.Name object
-@var empty: The empty DNS name.
-@type empty: dns.name.Name object
+:Variables:
+    :root: The DNS root name (:py:class:`dns.name.Name`)
+    :empty: The empty DNS name (:py:class:`dns.name.Name`)
 """
 
 import cStringIO
@@ -90,7 +89,7 @@ _escaped = {
 def _escapify(label):
     """Escape the characters in label which need it.
     @returns: the escaped string
-    @rtype: string"""
+    :rtype: string"""
     text = ''
     for c in label:
         if c in _escaped:
@@ -104,9 +103,9 @@ def _escapify(label):
 def _validate_labels(labels):
     """Check for empty labels in the middle of a label sequence,
     labels that are too long, and for too many labels.
-    @raises NameTooLong: the name as a whole is too long
-    @raises LabelTooLong: an individual label is too long
-    @raises EmptyLabel: a label is empty (i.e. the root label) and appears
+    :raises NameTooLong: the name as a whole is too long
+    :raises LabelTooLong: an individual label is too long
+    :raises EmptyLabel: a label is empty (i.e. the root label) and appears
     in a position other than the end of the label sequence"""
 
     l = len(labels)
@@ -132,15 +131,15 @@ class Name(object):
     The dns.name.Name class represents a DNS name as a tuple of labels.
     Instances of the class are immutable.
 
-    @ivar labels: The tuple of labels in the name. Each label is a string of
+    :ivar labels: The tuple of labels in the name. Each label is a string of
     up to 63 octets."""
 
     __slots__ = ['labels']
 
     def __init__(self, labels):
         """Initialize a domain name from a list of labels.
-        @param labels: the labels
-        @type labels: any iterable whose values are strings
+        :param labels: the labels
+        :type labels: any iterable whose values are strings
         """
 
         super(Name, self).__setattr__('labels', tuple(labels))
@@ -151,21 +150,21 @@ class Name(object):
 
     def is_absolute(self):
         """Is the most significant label of this name the root label?
-        @rtype: bool
+        :rtype: bool
         """
 
         return len(self.labels) > 0 and self.labels[-1] == ''
 
     def is_wild(self):
         """Is this name wild?  (I.e. Is the least significant label '*'?)
-        @rtype: bool
+        :rtype: bool
         """
 
         return len(self.labels) > 0 and self.labels[0] == '*'
 
     def __hash__(self):
         """Return a case-insensitive hash of the name.
-        @rtype: int
+        :rtype: int
         """
 
         h = 0L
@@ -239,7 +238,7 @@ class Name(object):
         """Is self a subdomain of other?
 
         The notion of subdomain includes equality.
-        @rtype: bool
+        :rtype: bool
         """
 
         (nr, o, nl) = self.fullcompare(other)
@@ -251,7 +250,7 @@ class Name(object):
         """Is self a superdomain of other?
 
         The notion of subdomain includes equality.
-        @rtype: bool
+        :rtype: bool
         """
 
         (nr, o, nl) = self.fullcompare(other)
@@ -262,7 +261,7 @@ class Name(object):
     def canonicalize(self):
         """Return a name which is equal to the current name, but is in
         DNSSEC canonical form.
-        @rtype: dns.name.Name object
+        :rtype: dns.name.Name object
         """
 
         return Name([x.lower() for x in self.labels])
@@ -311,9 +310,9 @@ class Name(object):
 
     def to_text(self, omit_final_dot = False):
         """Convert name to text format.
-        @param omit_final_dot: If True, don't emit the final dot (denoting the
+        :param omit_final_dot: If True, don't emit the final dot (denoting the
         root label) for absolute names.  The default is False.
-        @rtype: string
+        :rtype: string
         """
 
         if len(self.labels) == 0:
@@ -332,9 +331,9 @@ class Name(object):
 
         IDN ACE lables are converted to Unicode.
 
-        @param omit_final_dot: If True, don't emit the final dot (denoting the
+        :param omit_final_dot: If True, don't emit the final dot (denoting the
         root label) for absolute names.  The default is False.
-        @rtype: string
+        :rtype: string
         """
 
         if len(self.labels) == 0:
@@ -353,13 +352,13 @@ class Name(object):
 
         The name is canonicalized and converted to uncompressed wire format.
 
-        @param origin: If the name is relative and origin is not None, then
+        :param origin: If the name is relative and origin is not None, then
         origin will be appended to it.
-        @type origin: dns.name.Name object
-        @raises NeedAbsoluteNameOrOrigin: All names in wire format are
+        :type origin: dns.name.Name object
+        :raises NeedAbsoluteNameOrOrigin: All names in wire format are
         absolute.  If self is a relative name, then an origin must be supplied;
         if it is missing, then this exception is raised
-        @rtype: string
+        :rtype: string
         """
 
         if not self.is_absolute():
@@ -375,17 +374,17 @@ class Name(object):
     def to_wire(self, file = None, compress = None, origin = None):
         """Convert name to wire format, possibly compressing it.
 
-        @param file: the file where the name is emitted (typically
+        :param file: the file where the name is emitted (typically
         a cStringIO file).  If None, a string containing the wire name
         will be returned.
-        @type file: file or None
-        @param compress: The compression table.  If None (the default) names
+        :type file: file or None
+        :param compress: The compression table.  If None (the default) names
         will not be compressed.
-        @type compress: dict
-        @param origin: If the name is relative and origin is not None, then
+        :type compress: dict
+        :param origin: If the name is relative and origin is not None, then
         origin will be appended to it.
-        @type origin: dns.name.Name object
-        @raises NeedAbsoluteNameOrOrigin: All names in wire format are
+        :type origin: dns.name.Name object
+        :raises NeedAbsoluteNameOrOrigin: All names in wire format are
         absolute.  If self is a relative name, then an origin must be supplied;
         if it is missing, then this exception is raised
         """
@@ -430,7 +429,7 @@ class Name(object):
 
     def __len__(self):
         """The length of the name (in labels).
-        @rtype: int
+        :rtype: int
         """
 
         return len(self.labels)
@@ -450,12 +449,12 @@ class Name(object):
     def split(self, depth):
         """Split a name into a prefix and suffix at depth.
 
-        @param depth: the number of labels in the suffix
-        @type depth: int
-        @raises ValueError: the depth was not >= 0 and <= the length of the
+        :param depth: the number of labels in the suffix
+        :type depth: int
+        :raises ValueError: the depth was not >= 0 and <= the length of the
         name.
         @returns: the tuple (prefix, suffix)
-        @rtype: tuple
+        :rtype: tuple
         """
 
         l = len(self.labels)
@@ -469,8 +468,8 @@ class Name(object):
 
     def concatenate(self, other):
         """Return a new name which is the concatenation of self and other.
-        @rtype: dns.name.Name object
-        @raises AbsoluteConcatenation: self is absolute and other is
+        :rtype: dns.name.Name object
+        :raises AbsoluteConcatenation: self is absolute and other is
         not the empty name
         """
 
@@ -483,7 +482,7 @@ class Name(object):
     def relativize(self, origin):
         """If self is a subdomain of origin, return a new name which is self
         relative to origin.  Otherwise return self.
-        @rtype: dns.name.Name object
+        :rtype: dns.name.Name object
         """
 
         if not origin is None and self.is_subdomain(origin):
@@ -494,7 +493,7 @@ class Name(object):
     def derelativize(self, origin):
         """If self is a relative name, return a new name which is the
         concatenation of self and origin.  Otherwise return self.
-        @rtype: dns.name.Name object
+        :rtype: dns.name.Name object
         """
 
         if not self.is_absolute():
@@ -507,7 +506,7 @@ class Name(object):
         origin is None, then self is returned.  Otherwise, if
         relativize is true the name is relativized, and if relativize is
         false the name is derelativized.
-        @rtype: dns.name.Name object
+        :rtype: dns.name.Name object
         """
 
         if origin:
@@ -520,8 +519,8 @@ class Name(object):
 
     def parent(self):
         """Return the parent of the name.
-        @rtype: dns.name.Name object
-        @raises NoParent: the name is either the root name or the empty name,
+        :rtype: dns.name.Name object
+        :raises NoParent: the name is either the root name or the empty name,
         and thus has no parent.
         """
         if self == root or self == empty:
@@ -536,7 +535,7 @@ def from_unicode(text, origin = root):
 
     Lables are encoded in IDN ACE form.
 
-    @rtype: dns.name.Name object
+    :rtype: dns.name.Name object
     """
 
     if not isinstance(text, unicode):
@@ -595,7 +594,7 @@ def from_unicode(text, origin = root):
 
 def from_text(text, origin = root):
     """Convert text into a Name object.
-    @rtype: dns.name.Name object
+    :rtype: dns.name.Name object
     """
 
     if not isinstance(text, str):
@@ -656,17 +655,17 @@ def from_text(text, origin = root):
 
 def from_wire(message, current):
     """Convert possibly compressed wire format into a Name.
-    @param message: the entire DNS message
-    @type message: string
-    @param current: the offset of the beginning of the name from the start
+    :param message: the entire DNS message
+    :type message: string
+    :param current: the offset of the beginning of the name from the start
     of the message
-    @type current: int
-    @raises dns.name.BadPointer: a compression pointer did not point backwards
+    :type current: int
+    :raises dns.name.BadPointer: a compression pointer did not point backwards
     in the message
-    @raises dns.name.BadLabelType: an invalid label type was encountered.
+    :raises dns.name.BadLabelType: an invalid label type was encountered.
     @returns: a tuple consisting of the name that was read and the number
     of bytes of the wire format message which were consumed reading it
-    @rtype: (dns.name.Name object, int) tuple
+    :rtype: (dns.name.Name object, int) tuple
     """
 
     if not isinstance(message, str):

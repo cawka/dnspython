@@ -43,8 +43,8 @@ import ndn
 class NDNAUTH(dns.rdata.Rdata):
     """NDNAUTH record
 
-    @ivar zoneName: NDN name of the authoritative zone
-    @type zoneName: ndn.Name object"""
+    :ivar zoneName: NDN name of the authoritative zone
+    :type zoneName: ndn.Name object"""
 
     __slots__ = ['zoneName']
 

@@ -45,10 +45,10 @@ class UnknownOpcode(dns.exception.DNSException):
 def from_text(text):
     """Convert text into an opcode.
 
-    @param text: the textual opcode
-    @type text: string
-    @raises UnknownOpcode: the opcode is unknown
-    @rtype: int
+    :param text: the textual opcode
+    :type text: string
+    :raises UnknownOpcode: the opcode is unknown
+    :rtype: int
     """
 
     if text.isdigit():
@@ -63,8 +63,8 @@ def from_text(text):
 def from_flags(flags):
     """Extract an opcode from DNS message flags.
 
-    @param flags: int
-    @rtype: int
+    :param flags: int
+    :rtype: int
     """
     
     return (flags & 0x7800) >> 11
@@ -72,7 +72,7 @@ def from_flags(flags):
 def to_flags(value):
     """Convert an opcode to a value suitable for ORing into DNS message
     flags.
-    @rtype: int
+    :rtype: int
     """
     
     return (value << 11) & 0x7800
@@ -80,10 +80,10 @@ def to_flags(value):
 def to_text(value):
     """Convert an opcode to text.
 
-    @param value: the opcdoe
-    @type value: int
-    @raises UnknownOpcode: the opcode is unknown
-    @rtype: string
+    :param value: the opcdoe
+    :type value: int
+    :raises UnknownOpcode: the opcode is unknown
+    :rtype: string
     """
     
     text = _by_value.get(value)
@@ -94,9 +94,9 @@ def to_text(value):
 def is_update(flags):
     """True if the opcode in flags is UPDATE.
 
-    @param flags: DNS flags
-    @type flags: int
-    @rtype: bool
+    :param flags: DNS flags
+    :type flags: int
+    :rtype: bool
     """
     
     if (from_flags(flags) == UPDATE):

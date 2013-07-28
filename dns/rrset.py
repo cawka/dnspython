@@ -66,7 +66,7 @@ class RRset(dns.rdataset.Rdataset):
         """Two RRsets are equal if they have the same name and the same
         rdataset
 
-        @rtype: bool"""
+        :rtype: bool"""
         if not isinstance(other, RRset):
             return False
         if self.name != other.name:
@@ -93,10 +93,10 @@ class RRset(dns.rdataset.Rdataset):
         Any additional keyword arguments are passed on to the rdata
         to_text() method.
 
-        @param origin: The origin for relative names, or None.
-        @type origin: dns.name.Name object
-        @param relativize: True if names should names be relativized
-        @type relativize: bool"""
+        :param origin: The origin for relative names, or None.
+        :type origin: dns.name.Name object
+        :param relativize: True if names should names be relativized
+        :type relativize: bool"""
 
         return super(RRset, self).to_text(self.name, origin, relativize,
                                           self.deleting, **kw)
@@ -110,7 +110,7 @@ class RRset(dns.rdataset.Rdataset):
     def to_rdataset(self):
         """Convert an RRset into an Rdataset.
 
-        @rtype: dns.rdataset.Rdataset object
+        :rtype: dns.rdataset.Rdataset object
         """
         return dns.rdataset.from_rdata_list(self.ttl, list(self))
 
@@ -119,7 +119,7 @@ def from_text_list(name, ttl, rdclass, rdtype, text_rdatas):
     """Create an RRset with the specified name, TTL, class, and type, and with
     the specified list of rdatas in text format.
 
-    @rtype: dns.rrset.RRset object
+    :rtype: dns.rrset.RRset object
     """
 
     if isinstance(name, (str, unicode)):
@@ -139,7 +139,7 @@ def from_text(name, ttl, rdclass, rdtype, *text_rdatas):
     """Create an RRset with the specified name, TTL, class, and type and with
     the specified rdatas in text format.
 
-    @rtype: dns.rrset.RRset object
+    :rtype: dns.rrset.RRset object
     """
 
     return from_text_list(name, ttl, rdclass, rdtype, text_rdatas)
@@ -148,7 +148,7 @@ def from_rdata_list(name, ttl, rdatas):
     """Create an RRset with the specified name and TTL, and with
     the specified list of rdata objects.
 
-    @rtype: dns.rrset.RRset object
+    :rtype: dns.rrset.RRset object
     """
 
     if isinstance(name, (str, unicode)):
@@ -169,7 +169,7 @@ def from_rdata(name, ttl, *rdatas):
     """Create an RRset with the specified name and TTL, and with
     the specified rdata objects.
 
-    @rtype: dns.rrset.RRset object
+    :rtype: dns.rrset.RRset object
     """
 
     return from_rdata_list(name, ttl, rdatas)

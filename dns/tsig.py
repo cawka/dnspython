@@ -74,9 +74,9 @@ def sign(wire, keyname, secret, time, fudge, original_id, error,
     """Return a (tsig_rdata, mac, ctx) tuple containing the HMAC TSIG rdata
     for the input parameters, the HMAC MAC calculated by applying the
     TSIG signature algorithm, and the TSIG digest context.
-    @rtype: (string, string, hmac.HMAC object)
-    @raises ValueError: I{other_data} is too long
-    @raises NotImplementedError: I{algorithm} is not supported
+    :rtype: (string, string, hmac.HMAC object)
+    :raises ValueError: I{other_data} is too long
+    :raises NotImplementedError: I{algorithm} is not supported
     """
 
     (algorithm_name, digestmod) = get_algorithm(algorithm)
@@ -129,11 +129,11 @@ def validate(wire, keyname, secret, now, request_mac, tsig_start, tsig_rdata,
              tsig_rdlen, ctx=None, multi=False, first=True):
     """Validate the specified TSIG rdata against the other input parameters.
 
-    @raises FormError: The TSIG is badly formed.
-    @raises BadTime: There is too much time skew between the client and the
+    :raises FormError: The TSIG is badly formed.
+    :raises BadTime: There is too much time skew between the client and the
     server.
-    @raises BadSignature: The TSIG signature did not validate
-    @rtype: hmac.HMAC object"""
+    :raises BadSignature: The TSIG signature did not validate
+    :rtype: hmac.HMAC object"""
 
     (adcount,) = struct.unpack("!H", wire[10:12])
     if adcount == 0:
@@ -200,8 +200,8 @@ def get_algorithm(algorithm):
     """Returns the wire format string and the hash module to use for the
     specified TSIG algorithm
 
-    @rtype: (string, hash constructor)
-    @raises NotImplementedError: I{algorithm} is not supported
+    :rtype: (string, hash constructor)
+    :raises NotImplementedError: I{algorithm} is not supported
     """
 
     global _hashes

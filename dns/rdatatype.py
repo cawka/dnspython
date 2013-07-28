@@ -15,16 +15,16 @@
 
 """DNS Rdata Types.
 
-@var _by_text: The rdata type textual name to value mapping
-@type _by_text: dict
-@var _by_value: The rdata type value to textual name mapping
-@type _by_value: dict
-@var _metatypes: If an rdatatype is a metatype, there will be a mapping
+:var _by_text: The rdata type textual name to value mapping
+:type _by_text: dict
+:var _by_value: The rdata type value to textual name mapping
+:type _by_value: dict
+:var _metatypes: If an rdatatype is a metatype, there will be a mapping
 whose key is the rdatatype value and whose value is True in this dictionary.
-@type _metatypes: dict
-@var _singletons: If an rdatatype is a singleton, there will be a mapping
+:type _metatypes: dict
+:var _singletons: If an rdatatype is a singleton, there will be a mapping
 whose key is the rdatatype value and whose value is True in this dictionary.
-@type _singletons: dict"""
+:type _singletons: dict"""
 
 import re
 
@@ -198,11 +198,11 @@ class UnknownRdatatype(dns.exception.DNSException):
 
 def from_text(text):
     """Convert text into a DNS rdata type value.
-    @param text: the text
-    @type text: string
-    @raises dns.rdatatype.UnknownRdatatype: the type is unknown
-    @raises ValueError: the rdata type value is not >= 0 and <= 65535
-    @rtype: int"""
+    :param text: the text
+    :type text: string
+    :raises dns.rdatatype.UnknownRdatatype: the type is unknown
+    :raises ValueError: the rdata type value is not >= 0 and <= 65535
+    :rtype: int"""
 
     value = _by_text.get(text.upper())
     if value is None:
@@ -216,10 +216,10 @@ def from_text(text):
 
 def to_text(value):
     """Convert a DNS rdata type to text.
-    @param value: the rdata type value
-    @type value: int
-    @raises ValueError: the rdata type value is not >= 0 and <= 65535
-    @rtype: string"""
+    :param value: the rdata type value
+    :type value: int
+    :raises ValueError: the rdata type value is not >= 0 and <= 65535
+    :rtype: string"""
 
     if value < 0 or value > 65535:
         raise ValueError("type must be between >= 0 and <= 65535")
@@ -230,9 +230,9 @@ def to_text(value):
 
 def is_metatype(rdtype):
     """True if the type is a metatype.
-    @param rdtype: the type
-    @type rdtype: int
-    @rtype: bool"""
+    :param rdtype: the type
+    :type rdtype: int
+    :rtype: bool"""
 
     if rdtype >= TKEY and rdtype <= ANY or _metatypes.has_key(rdtype):
         return True
@@ -240,9 +240,9 @@ def is_metatype(rdtype):
 
 def is_singleton(rdtype):
     """True if the type is a singleton.
-    @param rdtype: the type
-    @type rdtype: int
-    @rtype: bool"""
+    :param rdtype: the type
+    :type rdtype: int
+    :rtype: bool"""
 
     if _singletons.has_key(rdtype):
         return True

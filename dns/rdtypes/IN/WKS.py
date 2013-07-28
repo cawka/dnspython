@@ -25,12 +25,12 @@ _proto_udp = socket.getprotobyname('udp')
 class WKS(dns.rdata.Rdata):
     """WKS record
 
-    @ivar address: the address
-    @type address: string
-    @ivar protocol: the protocol
-    @type protocol: int
-    @ivar bitmap: the bitmap
-    @type bitmap: string
+    :ivar address: the address
+    :type address: string
+    :ivar protocol: the protocol
+    :type protocol: int
+    :ivar bitmap: the bitmap
+    :type bitmap: string
     @see: RFC 1035"""
 
     __slots__ = ['address', 'protocol', 'bitmap']

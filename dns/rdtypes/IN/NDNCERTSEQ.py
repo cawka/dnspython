@@ -43,8 +43,8 @@ import ndn
 class NDNCERTSEQ(dns.rdata.Rdata):
     """NDNCERTSEQ record
 
-    @ivar seq: sequence number or version number
-    @type seq: ndn.Name object"""
+    :ivar seq: sequence number or version number
+    :type seq: ndn.Name object"""
 
     __slots__ = ['seq']
 

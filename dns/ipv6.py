@@ -25,10 +25,10 @@ _leading_zero = re.compile(r'0+([0-9a-f]+)')
 def inet_ntoa(address):
     """Convert a network format IPv6 address into text.
 
-    @param address: the binary address
-    @type address: string
-    @rtype: string
-    @raises ValueError: the address isn't 16 bytes long
+    :param address: the binary address
+    :type address: string
+    :rtype: string
+    :raises ValueError: the address isn't 16 bytes long
     """
 
     if len(address) != 16:
@@ -96,10 +96,10 @@ _colon_colon_end = re.compile(r'.*::$')
 def inet_aton(text):
     """Convert a text format IPv6 address into network format.
 
-    @param text: the textual address
-    @type text: string
-    @rtype: string
-    @raises dns.exception.SyntaxError: the text was not properly formatted
+    :param text: the textual address
+    :type text: string
+    :rtype: string
+    :raises dns.exception.SyntaxError: the text was not properly formatted
     """
 
     #

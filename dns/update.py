@@ -28,26 +28,26 @@ class Update(dns.message.Message):
                  keyname=None, keyalgorithm=dns.tsig.default_algorithm):
         """Initialize a new DNS Update object.
 
-        @param zone: The zone which is being updated.
-        @type zone: A dns.name.Name or string
-        @param rdclass: The class of the zone; defaults to dns.rdataclass.IN.
-        @type rdclass: An int designating the class, or a string whose value
+        :param zone: The zone which is being updated.
+        :type zone: A dns.name.Name or string
+        :param rdclass: The class of the zone; defaults to dns.rdataclass.IN.
+        :type rdclass: An int designating the class, or a string whose value
         is the name of a class.
-        @param keyring: The TSIG keyring to use; defaults to None.
-        @type keyring: dict
-        @param keyname: The name of the TSIG key to use; defaults to None.
+        :param keyring: The TSIG keyring to use; defaults to None.
+        :type keyring: dict
+        :param keyname: The name of the TSIG key to use; defaults to None.
         The key must be defined in the keyring.  If a keyring is specified
         but a keyname is not, then the key used will be the first key in the
         keyring.  Note that the order of keys in a dictionary is not defined,
         so applications should supply a keyname when a keyring is used, unless
         they know the keyring contains only one key.
-        @type keyname: dns.name.Name or string
-        @param keyalgorithm: The TSIG algorithm to use; defaults to
+        :type keyname: dns.name.Name or string
+        :param keyalgorithm: The TSIG algorithm to use; defaults to
         dns.tsig.default_algorithm.  Constants for TSIG algorithms are defined
         in dns.tsig, and the currently implemented algorithms are
         HMAC_MD5, HMAC_SHA1, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, and
         HMAC_SHA512.
-        @type keyalgorithm: string
+        :type keyalgorithm: string
         """
         super(Update, self).__init__()
         self.flags |= dns.opcode.to_flags(dns.opcode.UPDATE)
@@ -239,7 +239,7 @@ class Update(dns.message.Message):
     def to_wire(self, origin=None, max_size=65535):
         """Return a string containing the update in DNS compressed wire
         format.
-        @rtype: string"""
+        :rtype: string"""
         if origin is None:
             origin = self.origin
         return super(Update, self).to_wire(origin, max_size)

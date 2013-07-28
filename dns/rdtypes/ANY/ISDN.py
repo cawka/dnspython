@@ -20,10 +20,10 @@ import dns.tokenizer
 class ISDN(dns.rdata.Rdata):
     """ISDN record
 
-    @ivar address: the ISDN address
-    @type address: string
-    @ivar subaddress: the ISDN subaddress (or '' if not present)
-    @type subaddress: string
+    :ivar address: the ISDN address
+    :type address: string
+    :ivar subaddress: the ISDN subaddress (or '' if not present)
+    :type subaddress: string
     @see: RFC 1183"""
 
     __slots__ = ['address', 'subaddress']

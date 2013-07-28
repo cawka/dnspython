@@ -43,12 +43,12 @@ import ndn
 class FH(dns.rdata.Rdata):
     """FH record
 
-    @ivar priority: the priority
-    @type priority: int
-    @ivar weight: the weight
-    @type weight: int
-    @ivar hint: the target host
-    @type hint: ndn.Name object"""
+    :ivar priority: the priority
+    :type priority: int
+    :ivar weight: the weight
+    :type weight: int
+    :ivar hint: the target host
+    :type hint: ndn.Name object"""
 
     __slots__ = ['priority', 'weight', 'hint']
 

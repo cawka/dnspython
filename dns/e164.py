@@ -15,8 +15,8 @@
 
 """DNS E.164 helpers
 
-@var public_enum_domain: The DNS public ENUM domain, e164.arpa.
-@type public_enum_domain: dns.name.Name object
+:var public_enum_domain: The DNS public ENUM domain, e164.arpa.
+:type public_enum_domain: dns.name.Name object
 """
 
 import dns.exception
@@ -28,12 +28,12 @@ public_enum_domain = dns.name.from_text('e164.arpa.')
 def from_e164(text, origin=public_enum_domain):
     """Convert an E.164 number in textual form into a Name object whose
     value is the ENUM domain name for that number.
-    @param text: an E.164 number in textual form.
-    @type text: str
-    @param origin: The domain in which the number should be constructed.
+    :param text: an E.164 number in textual form.
+    :type text: str
+    :param origin: The domain in which the number should be constructed.
     The default is e164.arpa.
-    @type origin: dns.name.Name object or None
-    @rtype: dns.name.Name object
+    :type origin: dns.name.Name object or None
+    :rtype: dns.name.Name object
     """
     parts = [d for d in text if d.isdigit()]
     parts.reverse()
@@ -41,14 +41,14 @@ def from_e164(text, origin=public_enum_domain):
 
 def to_e164(name, origin=public_enum_domain, want_plus_prefix=True):
     """Convert an ENUM domain name into an E.164 number.
-    @param name: the ENUM domain name.
-    @type name: dns.name.Name object.
-    @param origin: A domain containing the ENUM domain name.  The
+    :param name: the ENUM domain name.
+    :type name: dns.name.Name object.
+    :param origin: A domain containing the ENUM domain name.  The
     name is relativized to this domain before being converted to text.
-    @type origin: dns.name.Name object or None
-    @param want_plus_prefix: if True, add a '+' to the beginning of the
+    :type origin: dns.name.Name object or None
+    :param want_plus_prefix: if True, add a '+' to the beginning of the
     returned number.
-    @rtype: str
+    :rtype: str
     """
     if not origin is None:
         name = name.relativize(origin)

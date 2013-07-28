@@ -18,10 +18,10 @@ import dns.rdtypes.mxbase
 class AFSDB(dns.rdtypes.mxbase.UncompressedDowncasingMX):
     """AFSDB record
 
-    @ivar subtype: the subtype value
-    @type subtype: int
-    @ivar hostname: the hostname name
-    @type hostname: dns.name.Name object"""
+    :ivar subtype: the subtype value
+    :type subtype: int
+    :ivar hostname: the hostname name
+    :type hostname: dns.name.Name object"""
 
     # Use the property mechanism to make "subtype" an alias for the
     # "preference" attribute, and "hostname" an alias for the "exchange"

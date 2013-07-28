@@ -15,10 +15,10 @@
 
 """DNS Reverse Map Names.
 
-@var ipv4_reverse_domain: The DNS IPv4 reverse-map domain, in-addr.arpa.
-@type ipv4_reverse_domain: dns.name.Name object
-@var ipv6_reverse_domain: The DNS IPv6 reverse-map domain, ip6.arpa.
-@type ipv6_reverse_domain: dns.name.Name object
+:var ipv4_reverse_domain: The DNS IPv4 reverse-map domain, in-addr.arpa.
+:type ipv4_reverse_domain: dns.name.Name object
+:var ipv6_reverse_domain: The DNS IPv6 reverse-map domain, ip6.arpa.
+:type ipv6_reverse_domain: dns.name.Name object
 """
 
 import dns.name
@@ -31,10 +31,10 @@ ipv6_reverse_domain = dns.name.from_text('ip6.arpa.')
 def from_address(text):
     """Convert an IPv4 or IPv6 address in textual form into a Name object whose
     value is the reverse-map domain name of the address.
-    @param text: an IPv4 or IPv6 address in textual form (e.g. '127.0.0.1',
+    :param text: an IPv4 or IPv6 address in textual form (e.g. '127.0.0.1',
     '::1')
-    @type text: str
-    @rtype: dns.name.Name object
+    :type text: str
+    :rtype: dns.name.Name object
     """
     try:
         parts = list(dns.ipv6.inet_aton(text).encode('hex_codec'))
@@ -47,9 +47,9 @@ def from_address(text):
 
 def to_address(name):
     """Convert a reverse map domain name into textual address form.
-    @param name: an IPv4 or IPv6 address in reverse-map form.
-    @type name: dns.name.Name object
-    @rtype: str
+    :param name: an IPv4 or IPv6 address in reverse-map form.
+    :type name: dns.name.Name object
+    :rtype: str
     """
     if name.is_subdomain(ipv4_reverse_domain):
         name = name.relativize(ipv4_reverse_domain)

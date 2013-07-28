@@ -26,8 +26,8 @@ class Node(object):
 
     A node is a set of rdatasets
 
-    @ivar rdatasets: the node's rdatasets
-    @type rdatasets: list of dns.rdataset.Rdataset objects"""
+    :ivar rdatasets: the node's rdatasets
+    :type rdatasets: list of dns.rdataset.Rdataset objects"""
 
     __slots__ = ['rdatasets']
 
@@ -42,9 +42,9 @@ class Node(object):
 
         Each rdataset at the node is printed.  Any keyword arguments
         to this method are passed on to the rdataset's to_text() method.
-        @param name: the owner name of the rdatasets
-        @type name: dns.name.Name object
-        @rtype: string
+        :param name: the owner name of the rdatasets
+        :type name: dns.name.Name object
+        :rtype: string
         """
 
         s = StringIO.StringIO()
@@ -59,7 +59,7 @@ class Node(object):
     def __eq__(self, other):
         """Two nodes are equal if they have the same rdatasets.
 
-        @rtype: bool
+        :rtype: bool
         """
         #
         # This is inefficient.  Good thing we don't need to do it much.
@@ -86,11 +86,11 @@ class Node(object):
         """Find an rdataset matching the specified properties in the
         current node.
 
-        @param rdclass: The class of the rdataset
-        @type rdclass: int
-        @param rdtype: The type of the rdataset
-        @type rdtype: int
-        @param covers: The covered type.  Usually this value is
+        :param rdclass: The class of the rdataset
+        :type rdclass: int
+        :param rdtype: The type of the rdataset
+        :type rdtype: int
+        :param covers: The covered type.  Usually this value is
         dns.rdatatype.NONE, but if the rdtype is dns.rdatatype.SIG or
         dns.rdatatype.RRSIG, then the covers value will be the rdata
         type the SIG/RRSIG covers.  The library treats the SIG and RRSIG
@@ -98,12 +98,12 @@ class Node(object):
         types, e.g. RRSIG(A), RRSIG(NS), RRSIG(SOA).  This makes RRSIGs much
         easier to work with than if RRSIGs covering different rdata
         types were aggregated into a single RRSIG rdataset.
-        @type covers: int
-        @param create: If True, create the rdataset if it is not found.
-        @type create: bool
-        @raises KeyError: An rdataset of the desired type and class does
+        :type covers: int
+        :param create: If True, create the rdataset if it is not found.
+        :type create: bool
+        :raises KeyError: An rdataset of the desired type and class does
         not exist and I{create} is not True.
-        @rtype: dns.rdataset.Rdataset object
+        :rtype: dns.rdataset.Rdataset object
         """
 
         for rds in self.rdatasets:
@@ -123,15 +123,15 @@ class Node(object):
         None is returned if an rdataset of the specified type and
         class does not exist and I{create} is not True.
 
-        @param rdclass: The class of the rdataset
-        @type rdclass: int
-        @param rdtype: The type of the rdataset
-        @type rdtype: int
-        @param covers: The covered type.
-        @type covers: int
-        @param create: If True, create the rdataset if it is not found.
-        @type create: bool
-        @rtype: dns.rdataset.Rdataset object or None
+        :param rdclass: The class of the rdataset
+        :type rdclass: int
+        :param rdtype: The type of the rdataset
+        :type rdtype: int
+        :param covers: The covered type.
+        :type covers: int
+        :param create: If True, create the rdataset if it is not found.
+        :type create: bool
+        :rtype: dns.rdataset.Rdataset object or None
         """
 
         try:
@@ -146,12 +146,12 @@ class Node(object):
 
         If a matching rdataset does not exist, it is not an error.
 
-        @param rdclass: The class of the rdataset
-        @type rdclass: int
-        @param rdtype: The type of the rdataset
-        @type rdtype: int
-        @param covers: The covered type.
-        @type covers: int
+        :param rdclass: The class of the rdataset
+        :type rdclass: int
+        :param rdtype: The type of the rdataset
+        :type rdtype: int
+        :param covers: The covered type.
+        :type covers: int
         """
 
         rds = self.get_rdataset(rdclass, rdtype, covers)

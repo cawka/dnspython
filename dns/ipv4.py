@@ -22,8 +22,8 @@ import dns.exception
 def inet_ntoa(address):
     """Convert an IPv4 address in network form to text form.
 
-    @param address: The IPv4 address
-    @type address: string
+    :param address: The IPv4 address
+    :type address: string
     @returns: string
     """
     if len(address) != 4:
@@ -34,8 +34,8 @@ def inet_ntoa(address):
 def inet_aton(text):
     """Convert an IPv4 address in text form to network form.
 
-    @param text: The IPv4 address
-    @type text: string
+    :param text: The IPv4 address
+    :type text: string
     @returns: string
     """
     parts = text.split('.')

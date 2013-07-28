@@ -36,18 +36,18 @@ OPTOUT = 1
 class NSEC3(dns.rdata.Rdata):
     """NSEC3 record
 
-    @ivar algorithm: the hash algorithm number
-    @type algorithm: int
-    @ivar flags: the flags
-    @type flags: int
-    @ivar iterations: the number of iterations
-    @type iterations: int
-    @ivar salt: the salt
-    @type salt: string
-    @ivar next: the next name hash
-    @type next: string
-    @ivar windows: the windowed bitmap list
-    @type windows: list of (window number, string) tuples"""
+    :ivar algorithm: the hash algorithm number
+    :type algorithm: int
+    :ivar flags: the flags
+    :type flags: int
+    :ivar iterations: the number of iterations
+    :type iterations: int
+    :ivar salt: the salt
+    :type salt: string
+    :ivar next: the next name hash
+    :type next: string
+    :ivar windows: the windowed bitmap list
+    :type windows: list of (window number, string) tuples"""
 
     __slots__ = ['algorithm', 'flags', 'iterations', 'salt', 'next', 'windows']
 

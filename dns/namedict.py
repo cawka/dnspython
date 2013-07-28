@@ -20,9 +20,9 @@ import dns.name
 class NameDict(dict):
 
     """A dictionary whose keys are dns.name.Name objects.
-    @ivar max_depth: the maximum depth of the keys that have ever been
+    :ivar max_depth: the maximum depth of the keys that have ever been
     added to the dictionary.
-    @type max_depth: int
+    :type max_depth: int
     """
 
     def __init__(self, *args, **kwargs):
@@ -43,9 +43,9 @@ class NameDict(dict):
         The deepest match is the longest name in the dictionary which is
         a superdomain of I{name}.
 
-        @param name: the name
-        @type name: dns.name.Name object
-        @rtype: (key, value) tuple
+        :param name: the name
+        :type name: dns.name.Name object
+        :rtype: (key, value) tuple
         """
 
         depth = len(name)

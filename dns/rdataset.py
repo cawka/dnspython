@@ -40,11 +40,11 @@ class IncompatibleTypes(dns.exception.DNSException):
 class Rdataset(dns.set.Set):
     """A DNS rdataset.
 
-    @ivar rdclass: The class of the rdataset
-    @type rdclass: int
-    @ivar rdtype: The type of the rdataset
-    @type rdtype: int
-    @ivar covers: The covered type.  Usually this value is
+    :ivar rdclass: The class of the rdataset
+    :type rdclass: int
+    :ivar rdtype: The type of the rdataset
+    :type rdtype: int
+    :ivar covers: The covered type.  Usually this value is
     dns.rdatatype.NONE, but if the rdtype is dns.rdatatype.SIG or
     dns.rdatatype.RRSIG, then the covers value will be the rdata
     type the SIG/RRSIG covers.  The library treats the SIG and RRSIG
@@ -52,9 +52,9 @@ class Rdataset(dns.set.Set):
     types, e.g. RRSIG(A), RRSIG(NS), RRSIG(SOA).  This makes RRSIGs much
     easier to work with than if RRSIGs covering different rdata
     types were aggregated into a single RRSIG rdataset.
-    @type covers: int
-    @ivar ttl: The DNS TTL (Time To Live) value
-    @type ttl: int
+    :type covers: int
+    :ivar ttl: The DNS TTL (Time To Live) value
+    :type ttl: int
     """
 
     __slots__ = ['rdclass', 'rdtype', 'covers', 'ttl']
@@ -83,8 +83,8 @@ class Rdataset(dns.set.Set):
         """Set the TTL of the rdataset to be the lesser of the set's current
         TTL or the specified TTL.  If the set contains no rdatas, set the TTL
         to the specified TTL.
-        @param ttl: The TTL
-        @type ttl: int"""
+        :param ttl: The TTL
+        :type ttl: int"""
 
         if len(self) == 0:
             self.ttl = ttl
@@ -97,10 +97,10 @@ class Rdataset(dns.set.Set):
         If the optional I{ttl} parameter is supplied, then
         self.update_ttl(ttl) will be called prior to adding the rdata.
 
-        @param rd: The rdata
-        @type rd: dns.rdata.Rdata object
-        @param ttl: The TTL
-        @type ttl: int"""
+        :param rd: The rdata
+        :type rd: dns.rdata.Rdata object
+        :param ttl: The TTL
+        :type ttl: int"""
 
         #
         # If we're adding a signature, do some special handling to
@@ -134,8 +134,8 @@ class Rdataset(dns.set.Set):
     def update(self, other):
         """Add all rdatas in other to self.
 
-        @param other: The rdataset from which to update
-        @type other: dns.rdataset.Rdataset object"""
+        :param other: The rdataset from which to update
+        :type other: dns.rdataset.Rdataset object"""
 
         self.update_ttl(other.ttl)
         super(Rdataset, self).update(other)
@@ -154,7 +154,7 @@ class Rdataset(dns.set.Set):
     def __eq__(self, other):
         """Two rdatasets are equal if they have the same class, type, and
         covers, and contain the same rdata.
-        @rtype: bool"""
+        :rtype: bool"""
 
         if not isinstance(other, Rdataset):
             return False
@@ -178,13 +178,13 @@ class Rdataset(dns.set.Set):
         Any additional keyword arguments are passed on to the rdata
         to_text() method.
 
-        @param name: If name is not None, emit a RRs with I{name} as
+        :param name: If name is not None, emit a RRs with I{name} as
         the owner name.
-        @type name: dns.name.Name object
-        @param origin: The origin for relative names, or None.
-        @type origin: dns.name.Name object
-        @param relativize: True if names should names be relativized
-        @type relativize: bool"""
+        :type name: dns.name.Name object
+        :param origin: The origin for relative names, or None.
+        :type origin: dns.name.Name object
+        :param relativize: True if names should names be relativized
+        :type relativize: bool"""
         if not name is None:
             name = name.choose_relativity(origin, relativize)
             ntext = str(name)
@@ -221,16 +221,16 @@ class Rdataset(dns.set.Set):
                 override_rdclass=None, want_shuffle=True):
         """Convert the rdataset to wire format.
 
-        @param name: The owner name of the RRset that will be emitted
-        @type name: dns.name.Name object
-        @param file: The file to which the wire format data will be appended
-        @type file: file
-        @param compress: The compression table to use; the default is None.
-        @type compress: dict
-        @param origin: The origin to be appended to any relative names when
+        :param name: The owner name of the RRset that will be emitted
+        :type name: dns.name.Name object
+        :param file: The file to which the wire format data will be appended
+        :type file: file
+        :param compress: The compression table to use; the default is None.
+        :type compress: dict
+        :param origin: The origin to be appended to any relative names when
         they are emitted.  The default is None.
         @returns: the number of records emitted
-        @rtype: int
+        :rtype: int
         """
 
         if not override_rdclass is None:
@@ -278,7 +278,7 @@ def from_text_list(rdclass, rdtype, ttl, text_rdatas):
     """Create an rdataset with the specified class, type, and TTL, and with
     the specified list of rdatas in text format.
 
-    @rtype: dns.rdataset.Rdataset object
+    :rtype: dns.rdataset.Rdataset object
     """
 
     if isinstance(rdclass, (str, unicode)):
@@ -296,7 +296,7 @@ def from_text(rdclass, rdtype, ttl, *text_rdatas):
     """Create an rdataset with the specified class, type, and TTL, and with
     the specified rdatas in text format.
 
-    @rtype: dns.rdataset.Rdataset object
+    :rtype: dns.rdataset.Rdataset object
     """
 
     return from_text_list(rdclass, rdtype, ttl, text_rdatas)
@@ -305,7 +305,7 @@ def from_rdata_list(ttl, rdatas):
     """Create an rdataset with the specified TTL, and with
     the specified list of rdata objects.
 
-    @rtype: dns.rdataset.Rdataset object
+    :rtype: dns.rdataset.Rdataset object
     """
 
     if len(rdatas) == 0:
@@ -323,7 +323,7 @@ def from_rdata(ttl, *rdatas):
     """Create an rdataset with the specified TTL, and with
     the specified rdata objects.
 
-    @rtype: dns.rdataset.Rdataset object
+    :rtype: dns.rdataset.Rdataset object
     """
 
     return from_rdata_list(ttl, rdatas)

@@ -23,8 +23,8 @@ class Option(object):
 
     def __init__(self, otype):
         """Initialize an option.
-        @param otype: The rdata type
-        @type otype: int
+        :param otype: The rdata type
+        :type otype: int
         """
         self.otype = otype
 
@@ -36,15 +36,15 @@ class Option(object):
     def from_wire(cls, otype, wire, current, olen):
         """Build an EDNS option object from wire format
 
-        @param otype: The option type
-        @type otype: int
-        @param wire: The wire-format message
-        @type wire: string
-        @param current: The offet in wire of the beginning of the rdata.
-        @type current: int
-        @param olen: The length of the wire-format option data
-        @type olen: int
-        @rtype: dns.edns.Option instance"""
+        :param otype: The option type
+        :type otype: int
+        :param wire: The wire-format message
+        :type wire: string
+        :param current: The offet in wire of the beginning of the rdata.
+        :type current: int
+        :param olen: The length of the wire-format option data
+        :type olen: int
+        :rtype: dns.edns.Option instance"""
         raise NotImplementedError
 
     from_wire = classmethod(from_wire)
@@ -128,15 +128,15 @@ def get_option_class(otype):
 def option_from_wire(otype, wire, current, olen):
     """Build an EDNS option object from wire format
 
-    @param otype: The option type
-    @type otype: int
-    @param wire: The wire-format message
-    @type wire: string
-    @param current: The offet in wire of the beginning of the rdata.
-    @type current: int
-    @param olen: The length of the wire-format option data
-    @type olen: int
-    @rtype: dns.edns.Option instance"""
+    :param otype: The option type
+    :type otype: int
+    :param wire: The wire-format message
+    :type wire: string
+    :param current: The offet in wire of the beginning of the rdata.
+    :type current: int
+    :param olen: The length of the wire-format option data
+    :type olen: int
+    :rtype: dns.edns.Option instance"""
 
     cls = get_option_class(otype)
     return cls.from_wire(otype, wire, current, olen)

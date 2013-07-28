@@ -58,17 +58,17 @@ class Zone(object):
     if the name is relative it is treated as relative to the origin of
     the zone.
 
-    @ivar rdclass: The zone's rdata class; the default is class IN.
-    @type rdclass: int
-    @ivar origin: The origin of the zone.
-    @type origin: dns.name.Name object
-    @ivar nodes: A dictionary mapping the names of nodes in the zone to the
+    :ivar rdclass: The zone's rdata class; the default is class IN.
+    :type rdclass: int
+    :ivar origin: The origin of the zone.
+    :type origin: dns.name.Name object
+    :ivar nodes: A dictionary mapping the names of nodes in the zone to the
     nodes themselves.
-    @type nodes: dict
-    @ivar relativize: should names in the zone be relativized?
-    @type relativize: bool
+    :type nodes: dict
+    :ivar relativize: should names in the zone be relativized?
+    :type relativize: bool
     @cvar node_factory: the factory used to create a new node
-    @type node_factory: class or callable
+    :type node_factory: class or callable
     """
 
     node_factory = dns.node.Node
@@ -78,10 +78,10 @@ class Zone(object):
     def __init__(self, origin, rdclass=dns.rdataclass.IN, relativize=True):
         """Initialize a zone object.
 
-        @param origin: The origin of the zone.
-        @type origin: dns.name.Name object
-        @param rdclass: The zone's rdata class; the default is class IN.
-        @type rdclass: int"""
+        :param origin: The origin of the zone.
+        :type origin: dns.name.Name object
+        :param rdclass: The zone's rdata class; the default is class IN.
+        :type rdclass: int"""
 
         self.rdclass = rdclass
         self.origin = origin
@@ -91,7 +91,7 @@ class Zone(object):
     def __eq__(self, other):
         """Two zones are equal if they have the same origin, class, and
         nodes.
-        @rtype: bool
+        :rtype: bool
         """
 
         if not isinstance(other, Zone):
@@ -104,7 +104,7 @@ class Zone(object):
 
     def __ne__(self, other):
         """Are two zones not equal?
-        @rtype: bool
+        :rtype: bool
         """
 
         return not self.__eq__(other)
@@ -164,12 +164,12 @@ class Zone(object):
     def find_node(self, name, create=False):
         """Find a node in the zone, possibly creating it.
 
-        @param name: the name of the node to find
-        @type name: dns.name.Name object or string
-        @param create: should the node be created if it doesn't exist?
-        @type create: bool
-        @raises KeyError: the name is not known and create was not specified.
-        @rtype: dns.node.Node object
+        :param name: the name of the node to find
+        :type name: dns.name.Name object or string
+        :param create: should the node be created if it doesn't exist?
+        :type create: bool
+        :raises KeyError: the name is not known and create was not specified.
+        :rtype: dns.node.Node object
         """
 
         name = self._validate_name(name)
@@ -188,11 +188,11 @@ class Zone(object):
         of raising an exception if the node does not exist and creation
         has not been requested.
 
-        @param name: the name of the node to find
-        @type name: dns.name.Name object or string
-        @param create: should the node be created if it doesn't exist?
-        @type create: bool
-        @rtype: dns.node.Node object or None
+        :param name: the name of the node to find
+        :type name: dns.name.Name object or string
+        :param create: should the node be created if it doesn't exist?
+        :type create: bool
+        :rtype: dns.node.Node object or None
         """
 
         try:
@@ -226,17 +226,17 @@ class Zone(object):
         KeyError is raised if the name or type are not found.
         Use L{get_rdataset} if you want to have None returned instead.
 
-        @param name: the owner name to look for
-        @type name: DNS.name.Name object or string
-        @param rdtype: the rdata type desired
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
-        @param create: should the node and rdataset be created if they do not
+        :param name: the owner name to look for
+        :type name: DNS.name.Name object or string
+        :param rdtype: the rdata type desired
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
+        :param create: should the node and rdataset be created if they do not
         exist?
-        @type create: bool
-        @raises KeyError: the node or rdata could not be found
-        @rtype: dns.rrset.RRset object
+        :type create: bool
+        :raises KeyError: the node or rdata could not be found
+        :rtype: dns.rrset.RRset object
         """
 
         name = self._validate_name(name)
@@ -262,16 +262,16 @@ class Zone(object):
         None is returned if the name or type are not found.
         Use L{find_rdataset} if you want to have KeyError raised instead.
 
-        @param name: the owner name to look for
-        @type name: DNS.name.Name object or string
-        @param rdtype: the rdata type desired
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
-        @param create: should the node and rdataset be created if they do not
+        :param name: the owner name to look for
+        :type name: DNS.name.Name object or string
+        :param rdtype: the rdata type desired
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
+        :param create: should the node and rdataset be created if they do not
         exist?
-        @type create: bool
-        @rtype: dns.rrset.RRset object
+        :type create: bool
+        :rtype: dns.rrset.RRset object
         """
 
         try:
@@ -294,12 +294,12 @@ class Zone(object):
         If the node has no rdatasets after the deletion, it will itself
         be deleted.
 
-        @param name: the owner name to look for
-        @type name: DNS.name.Name object or string
-        @param rdtype: the rdata type desired
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
+        :param name: the owner name to look for
+        :type name: DNS.name.Name object or string
+        :param rdtype: the rdata type desired
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
         """
 
         name = self._validate_name(name)
@@ -324,10 +324,10 @@ class Zone(object):
 
         If the I{name} node does not exist, it is created.
 
-        @param name: the owner name
-        @type name: DNS.name.Name object or string
-        @param replacement: the replacement rdataset
-        @type replacement: dns.rdataset.Rdataset
+        :param name: the owner name
+        :type name: DNS.name.Name object or string
+        :param replacement: the replacement rdataset
+        :type replacement: dns.rdataset.Rdataset
         """
 
         if replacement.rdclass != self.rdclass:
@@ -355,14 +355,14 @@ class Zone(object):
         KeyError is raised if the name or type are not found.
         Use L{get_rrset} if you want to have None returned instead.
 
-        @param name: the owner name to look for
-        @type name: DNS.name.Name object or string
-        @param rdtype: the rdata type desired
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
-        @raises KeyError: the node or rdata could not be found
-        @rtype: dns.rrset.RRset object
+        :param name: the owner name to look for
+        :type name: DNS.name.Name object or string
+        :param rdtype: the rdata type desired
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
+        :raises KeyError: the node or rdata could not be found
+        :rtype: dns.rrset.RRset object
         """
 
         name = self._validate_name(name)
@@ -394,13 +394,13 @@ class Zone(object):
         None is returned if the name or type are not found.
         Use L{find_rrset} if you want to have KeyError raised instead.
 
-        @param name: the owner name to look for
-        @type name: DNS.name.Name object or string
-        @param rdtype: the rdata type desired
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
-        @rtype: dns.rrset.RRset object
+        :param name: the owner name to look for
+        :type name: DNS.name.Name object or string
+        :param rdtype: the rdata type desired
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
+        :rtype: dns.rrset.RRset object
         """
 
         try:
@@ -416,10 +416,10 @@ class Zone(object):
         and I{covers}.  If I{rdtype} is dns.rdatatype.ANY, the default,
         then all rdatasets will be matched.
 
-        @param rdtype: int or string
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
+        :param rdtype: int or string
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
         """
 
         if isinstance(rdtype, (str, unicode)):
@@ -439,10 +439,10 @@ class Zone(object):
         and I{covers}.  If I{rdtype} is dns.rdatatype.ANY, the default,
         then all rdatas will be matched.
 
-        @param rdtype: int or string
-        @type rdtype: int or string
-        @param covers: the covered type (defaults to None)
-        @type covers: int or string
+        :param rdtype: int or string
+        :type rdtype: int or string
+        :param covers: the covered type (defaults to None)
+        :type covers: int or string
         """
 
         if isinstance(rdtype, (str, unicode)):
@@ -459,19 +459,19 @@ class Zone(object):
     def to_file(self, f, sorted=True, relativize=True, nl=None):
         """Write a zone to a file.
 
-        @param f: file or string.  If I{f} is a string, it is treated
+        :param f: file or string.  If I{f} is a string, it is treated
         as the name of a file to open.
-        @param sorted: if True, the file will be written with the
+        :param sorted: if True, the file will be written with the
         names sorted in DNSSEC order from least to greatest.  Otherwise
         the names will be written in whatever order they happen to have
         in the zone's dictionary.
-        @param relativize: if True, domain names in the output will be
+        :param relativize: if True, domain names in the output will be
         relativized to the zone's origin (if possible).
-        @type relativize: bool
-        @param nl: The end of line string.  If not specified, the
+        :type relativize: bool
+        :param nl: The end of line string.  If not specified, the
         output will use the platform's native end-of-line marker (i.e.
         LF on POSIX, CRLF on Windows, CR on Macintosh).
-        @type nl: string or None
+        :type nl: string or None
         """
 
         if sys.hexversion >= 0x02030000:
@@ -509,9 +509,9 @@ class Zone(object):
     def check_origin(self):
         """Do some simple checking of the zone's origin.
 
-        @raises dns.zone.NoSOA: there is no SOA RR
-        @raises dns.zone.NoNS: there is no NS RRset
-        @raises KeyError: there is no origin node
+        :raises dns.zone.NoSOA: there is no SOA RR
+        :raises dns.zone.NoNS: there is no NS RRset
+        :raises KeyError: there is no origin node
         """
         if self.relativize:
             name = dns.name.empty
@@ -526,28 +526,28 @@ class Zone(object):
 class _MasterReader(object):
     """Read a DNS master file
 
-    @ivar tok: The tokenizer
-    @type tok: dns.tokenizer.Tokenizer object
-    @ivar ttl: The default TTL
-    @type ttl: int
-    @ivar last_name: The last name read
-    @type last_name: dns.name.Name object
-    @ivar current_origin: The current origin
-    @type current_origin: dns.name.Name object
-    @ivar relativize: should names in the zone be relativized?
-    @type relativize: bool
-    @ivar zone: the zone
-    @type zone: dns.zone.Zone object
-    @ivar saved_state: saved reader state (used when processing $INCLUDE)
-    @type saved_state: list of (tokenizer, current_origin, last_name, file)
+    :ivar tok: The tokenizer
+    :type tok: dns.tokenizer.Tokenizer object
+    :ivar ttl: The default TTL
+    :type ttl: int
+    :ivar last_name: The last name read
+    :type last_name: dns.name.Name object
+    :ivar current_origin: The current origin
+    :type current_origin: dns.name.Name object
+    :ivar relativize: should names in the zone be relativized?
+    :type relativize: bool
+    :ivar zone: the zone
+    :type zone: dns.zone.Zone object
+    :ivar saved_state: saved reader state (used when processing $INCLUDE)
+    :type saved_state: list of (tokenizer, current_origin, last_name, file)
     tuples.
-    @ivar current_file: the file object of the $INCLUDed file being parsed
+    :ivar current_file: the file object of the $INCLUDed file being parsed
     (None if no $INCLUDE is active).
-    @ivar allow_include: is $INCLUDE allowed?
-    @type allow_include: bool
-    @ivar check_origin: should sanity checks of the origin node be done?
+    :ivar allow_include: is $INCLUDE allowed?
+    :type allow_include: bool
+    :ivar check_origin: should sanity checks of the origin node be done?
     The default is True.
-    @type check_origin: bool
+    :type check_origin: bool
     """
 
     def __init__(self, tok, origin, rdclass, relativize, zone_factory=Zone,
@@ -807,8 +807,8 @@ class _MasterReader(object):
     def read(self):
         """Read a DNS master file and build a zone object.
 
-        @raises dns.zone.NoSOA: No SOA RR was found at the zone origin
-        @raises dns.zone.NoNS: No NS RRset was found at the zone origin
+        :raises dns.zone.NoSOA: No SOA RR was found at the zone origin
+        :raises dns.zone.NoNS: No NS RRset was found at the zone origin
         """
 
         try:
@@ -886,29 +886,29 @@ def from_text(text, origin = None, rdclass = dns.rdataclass.IN,
               allow_include=False, check_origin=True):
     """Build a zone object from a master file format string.
 
-    @param text: the master file format input
-    @type text: string.
-    @param origin: The origin of the zone; if not specified, the first
+    :param text: the master file format input
+    :type text: string.
+    :param origin: The origin of the zone; if not specified, the first
     $ORIGIN statement in the master file will determine the origin of the
     zone.
-    @type origin: dns.name.Name object or string
-    @param rdclass: The zone's rdata class; the default is class IN.
-    @type rdclass: int
-    @param relativize: should names be relativized?  The default is True
-    @type relativize: bool
-    @param zone_factory: The zone factory to use
-    @type zone_factory: function returning a Zone
-    @param filename: The filename to emit when describing where an error
+    :type origin: dns.name.Name object or string
+    :param rdclass: The zone's rdata class; the default is class IN.
+    :type rdclass: int
+    :param relativize: should names be relativized?  The default is True
+    :type relativize: bool
+    :param zone_factory: The zone factory to use
+    :type zone_factory: function returning a Zone
+    :param filename: The filename to emit when describing where an error
     occurred; the default is '<string>'.
-    @type filename: string
-    @param allow_include: is $INCLUDE allowed?
-    @type allow_include: bool
-    @param check_origin: should sanity checks of the origin node be done?
+    :type filename: string
+    :param allow_include: is $INCLUDE allowed?
+    :type allow_include: bool
+    :param check_origin: should sanity checks of the origin node be done?
     The default is True.
-    @type check_origin: bool
-    @raises dns.zone.NoSOA: No SOA RR was found at the zone origin
-    @raises dns.zone.NoNS: No NS RRset was found at the zone origin
-    @rtype: dns.zone.Zone object
+    :type check_origin: bool
+    :raises dns.zone.NoSOA: No SOA RR was found at the zone origin
+    :raises dns.zone.NoNS: No NS RRset was found at the zone origin
+    :rtype: dns.zone.Zone object
     """
 
     # 'text' can also be a file, but we don't publish that fact
@@ -929,30 +929,30 @@ def from_file(f, origin = None, rdclass = dns.rdataclass.IN,
               allow_include=True, check_origin=True):
     """Read a master file and build a zone object.
 
-    @param f: file or string.  If I{f} is a string, it is treated
+    :param f: file or string.  If I{f} is a string, it is treated
     as the name of a file to open.
-    @param origin: The origin of the zone; if not specified, the first
+    :param origin: The origin of the zone; if not specified, the first
     $ORIGIN statement in the master file will determine the origin of the
     zone.
-    @type origin: dns.name.Name object or string
-    @param rdclass: The zone's rdata class; the default is class IN.
-    @type rdclass: int
-    @param relativize: should names be relativized?  The default is True
-    @type relativize: bool
-    @param zone_factory: The zone factory to use
-    @type zone_factory: function returning a Zone
-    @param filename: The filename to emit when describing where an error
+    :type origin: dns.name.Name object or string
+    :param rdclass: The zone's rdata class; the default is class IN.
+    :type rdclass: int
+    :param relativize: should names be relativized?  The default is True
+    :type relativize: bool
+    :param zone_factory: The zone factory to use
+    :type zone_factory: function returning a Zone
+    :param filename: The filename to emit when describing where an error
     occurred; the default is '<file>', or the value of I{f} if I{f} is a
     string.
-    @type filename: string
-    @param allow_include: is $INCLUDE allowed?
-    @type allow_include: bool
-    @param check_origin: should sanity checks of the origin node be done?
+    :type filename: string
+    :param allow_include: is $INCLUDE allowed?
+    :type allow_include: bool
+    :param check_origin: should sanity checks of the origin node be done?
     The default is True.
-    @type check_origin: bool
-    @raises dns.zone.NoSOA: No SOA RR was found at the zone origin
-    @raises dns.zone.NoNS: No NS RRset was found at the zone origin
-    @rtype: dns.zone.Zone object
+    :type check_origin: bool
+    :raises dns.zone.NoSOA: No SOA RR was found at the zone origin
+    :raises dns.zone.NoNS: No NS RRset was found at the zone origin
+    :rtype: dns.zone.Zone object
     """
 
     if sys.hexversion >= 0x02030000:
@@ -983,18 +983,18 @@ def from_file(f, origin = None, rdclass = dns.rdataclass.IN,
 def from_xfr(xfr, zone_factory=Zone, relativize=True, check_origin=True):
     """Convert the output of a zone transfer generator into a zone object.
 
-    @param xfr: The xfr generator
-    @type xfr: generator of dns.message.Message objects
-    @param relativize: should names be relativized?  The default is True.
+    :param xfr: The xfr generator
+    :type xfr: generator of dns.message.Message objects
+    :param relativize: should names be relativized?  The default is True.
     It is essential that the relativize setting matches the one specified
     to dns.query.xfr().
-    @type relativize: bool
-    @param check_origin: should sanity checks of the origin node be done?
+    :type relativize: bool
+    :param check_origin: should sanity checks of the origin node be done?
     The default is True.
-    @type check_origin: bool
-    @raises dns.zone.NoSOA: No SOA RR was found at the zone origin
-    @raises dns.zone.NoNS: No NS RRset was found at the zone origin
-    @rtype: dns.zone.Zone object
+    :type check_origin: bool
+    :raises dns.zone.NoSOA: No SOA RR was found at the zone origin
+    :raises dns.zone.NoNS: No NS RRset was found at the zone origin
+    :rtype: dns.zone.Zone object
     """
 
     z = None

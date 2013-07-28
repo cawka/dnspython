@@ -21,10 +21,10 @@ def from_text(text):
     """Convert the text form of a range in a GENERATE statement to an
     integer.
 
-    @param text: the textual range
-    @type text: string
+    :param text: the textual range
+    :type text: string
     @return range: The start, stop and step values.
-    @type range: tuple
+    :type range: tuple
     """
     # TODO, figure out the bounds on start, stop and step.
 

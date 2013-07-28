@@ -37,13 +37,13 @@ except AttributeError:
 def inet_pton(family, text):
     """Convert the textual form of a network address into its binary form.
 
-    @param family: the address family
-    @type family: int
-    @param text: the textual address
-    @type text: string
-    @raises NotImplementedError: the address family specified is not
+    :param family: the address family
+    :type family: int
+    :param text: the textual address
+    :type text: string
+    :raises NotImplementedError: the address family specified is not
     implemented.
-    @rtype: string
+    :rtype: string
     """
     
     if family == AF_INET:
@@ -56,13 +56,13 @@ def inet_pton(family, text):
 def inet_ntop(family, address):
     """Convert the binary form of a network address into its textual form.
 
-    @param family: the address family
-    @type family: int
-    @param address: the binary address
-    @type address: string
-    @raises NotImplementedError: the address family specified is not
+    :param family: the address family
+    :type family: int
+    :param address: the binary address
+    :type address: string
+    :raises NotImplementedError: the address family specified is not
     implemented.
-    @rtype: string
+    :rtype: string
     """
     if family == AF_INET:
         return dns.ipv4.inet_ntoa(address)
@@ -74,10 +74,10 @@ def inet_ntop(family, address):
 def af_for_address(text):
     """Determine the address family of a textual-form network address.
 
-    @param text: the textual address
-    @type text: string
-    @raises ValueError: the address family cannot be determined from the input.
-    @rtype: int
+    :param text: the textual address
+    :type text: string
+    :raises ValueError: the address family cannot be determined from the input.
+    :rtype: int
     """
     try:
         junk = dns.ipv4.inet_aton(text)
@@ -92,9 +92,9 @@ def af_for_address(text):
 def is_multicast(text):
     """Is the textual-form network address a multicast address?
 
-    @param text: the textual address
-    @raises ValueError: the address family cannot be determined from the input.
-    @rtype: bool
+    :param text: the textual address
+    :raises ValueError: the address family cannot be determined from the input.
+    :rtype: bool
     """
     try:
         first = ord(dns.ipv4.inet_aton(text)[0])

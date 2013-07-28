@@ -23,10 +23,10 @@ import dns.name
 class NSEC(dns.rdata.Rdata):
     """NSEC record
 
-    @ivar next: the next name
-    @type next: dns.name.Name object
-    @ivar windows: the windowed bitmap list
-    @type windows: list of (window number, string) tuples"""
+    :ivar next: the next name
+    :type next: dns.name.Name object
+    :ivar windows: the windowed bitmap list
+    :type windows: list of (window number, string) tuples"""
 
     __slots__ = ['next', 'windows']
 

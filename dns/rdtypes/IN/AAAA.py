@@ -21,8 +21,8 @@ import dns.tokenizer
 class AAAA(dns.rdata.Rdata):
     """AAAA record.
 
-    @ivar address: an IPv6 address
-    @type address: string (in the standard IPv6 format)"""
+    :ivar address: an IPv6 address
+    :type address: string (in the standard IPv6 format)"""
 
     __slots__ = ['address']
 

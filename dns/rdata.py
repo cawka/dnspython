@@ -15,15 +15,15 @@
 
 """DNS rdata.
 
-@var _rdata_modules: A dictionary mapping a (rdclass, rdtype) tuple to
+:var _rdata_modules: A dictionary mapping a (rdclass, rdtype) tuple to
 the module which implements that type.
-@type _rdata_modules: dict
-@var _module_prefix: The prefix to use when forming modules names.  The
+:type _rdata_modules: dict
+:var _module_prefix: The prefix to use when forming modules names.  The
 default is 'dns.rdtypes'.  Changing this value will break the library.
-@type _module_prefix: string
-@var _hex_chunk: At most this many octets that will be represented in each
+:type _module_prefix: string
+:var _hex_chunk: At most this many octets that will be represented in each
 chunk of hexstring that _hexify() produces before whitespace occurs.
-@type _hex_chunk: int"""
+:type _hex_chunk: int"""
 
 import cStringIO
 
@@ -40,10 +40,10 @@ def _hexify(data, chunksize=None):
     """Convert a binary string into its hex encoding, broken up into chunks
     of I{chunksize} characters separated by a space.
 
-    @param data: the binary string
-    @type data: string
-    @param chunksize: the chunk size.  Default is L{dns.rdata._hex_chunksize}
-    @rtype: string
+    :param data: the binary string
+    :type data: string
+    :param chunksize: the chunk size.  Default is L{dns.rdata._hex_chunksize}
+    :rtype: string
     """
 
     if chunksize is None:
@@ -65,11 +65,11 @@ def _base64ify(data, chunksize=None):
     """Convert a binary string into its base64 encoding, broken up into chunks
     of I{chunksize} characters separated by a space.
 
-    @param data: the binary string
-    @type data: string
-    @param chunksize: the chunk size.  Default is
+    :param data: the binary string
+    :type data: string
+    :param chunksize: the chunk size.  Default is
     L{dns.rdata._base64_chunksize}
-    @rtype: string
+    :rtype: string
     """
 
     if chunksize is None:
@@ -94,10 +94,10 @@ __escaped = {
 def _escapify(qstring):
     """Escape the characters in a quoted string which need it.
 
-    @param qstring: the string
-    @type qstring: string
+    :param qstring: the string
+    :type qstring: string
     @returns: the escaped string
-    @rtype: string
+    :rtype: string
     """
 
     text = ''
@@ -114,9 +114,9 @@ def _truncate_bitmap(what):
     """Determine the index of greatest byte that isn't all zeros, and
     return the bitmap that contains all the bytes less than that index.
 
-    @param what: a string of octets representing a bitmap.
-    @type what: string
-    @rtype: string
+    :param what: a string of octets representing a bitmap.
+    :type what: string
+    :rtype: string
     """
 
     for i in xrange(len(what) - 1, -1, -1):
@@ -132,10 +132,10 @@ class Rdata(object):
 
     def __init__(self, rdclass, rdtype):
         """Initialize an rdata.
-        @param rdclass: The rdata class
-        @type rdclass: int
-        @param rdtype: The rdata type
-        @type rdtype: int
+        :param rdclass: The rdata class
+        :type rdclass: int
+        :param rdtype: The rdata type
+        :type rdtype: int
         """
 
         self.rdclass = rdclass
@@ -147,7 +147,7 @@ class Rdata(object):
         SIG or RRSIG, dns.rdatatype.NONE is returned.  This is useful when
         creating rdatasets, allowing the rdataset to contain only RRSIGs
         of a particular type, e.g. RRSIG(NS).
-        @rtype: int
+        :rtype: int
         """
 
         return dns.rdatatype.NONE
@@ -156,20 +156,20 @@ class Rdata(object):
         """Return a 32-bit type value, the least significant 16 bits of
         which are the ordinary DNS type, and the upper 16 bits of which are
         the "covered" type, if any.
-        @rtype: int
+        :rtype: int
         """
 
         return self.covers() << 16 | self.rdtype
 
     def to_text(self, origin=None, relativize=True, **kw):
         """Convert an rdata to text format.
-        @rtype: string
+        :rtype: string
         """
         raise NotImplementedError
 
     def to_wire(self, file, compress = None, origin = None):
         """Convert an rdata to wire format.
-        @rtype: string
+        :rtype: string
         """
 
         raise NotImplementedError
@@ -273,17 +273,17 @@ class Rdata(object):
     def from_text(cls, rdclass, rdtype, tok, origin = None, relativize = True):
         """Build an rdata object from text format.
 
-        @param rdclass: The rdata class
-        @type rdclass: int
-        @param rdtype: The rdata type
-        @type rdtype: int
-        @param tok: The tokenizer
-        @type tok: dns.tokenizer.Tokenizer
-        @param origin: The origin to use for relative names
-        @type origin: dns.name.Name
-        @param relativize: should names be relativized?
-        @type relativize: bool
-        @rtype: dns.rdata.Rdata instance
+        :param rdclass: The rdata class
+        :type rdclass: int
+        :param rdtype: The rdata type
+        :type rdtype: int
+        :param tok: The tokenizer
+        :type tok: dns.tokenizer.Tokenizer
+        :param origin: The origin to use for relative names
+        :type origin: dns.name.Name
+        :param relativize: should names be relativized?
+        :type relativize: bool
+        :rtype: dns.rdata.Rdata instance
         """
 
         raise NotImplementedError
@@ -293,19 +293,19 @@ class Rdata(object):
     def from_wire(cls, rdclass, rdtype, wire, current, rdlen, origin = None):
         """Build an rdata object from wire format
 
-        @param rdclass: The rdata class
-        @type rdclass: int
-        @param rdtype: The rdata type
-        @type rdtype: int
-        @param wire: The wire-format message
-        @type wire: string
-        @param current: The offet in wire of the beginning of the rdata.
-        @type current: int
-        @param rdlen: The length of the wire-format rdata
-        @type rdlen: int
-        @param origin: The origin to use for relative names
-        @type origin: dns.name.Name
-        @rtype: dns.rdata.Rdata instance
+        :param rdclass: The rdata class
+        :type rdclass: int
+        :param rdtype: The rdata type
+        :type rdtype: int
+        :param wire: The wire-format message
+        :type wire: string
+        :param current: The offet in wire of the beginning of the rdata.
+        :type current: int
+        :param rdlen: The length of the wire-format rdata
+        :type rdlen: int
+        :param origin: The origin to use for relative names
+        :type origin: dns.name.Name
+        :rtype: dns.rdata.Rdata instance
         """
 
         raise NotImplementedError
@@ -416,17 +416,17 @@ def from_text(rdclass, rdtype, tok, origin = None, relativize = True):
     If I{tok} is a string, then a tokenizer is created and the string
     is used as its input.
 
-    @param rdclass: The rdata class
-    @type rdclass: int
-    @param rdtype: The rdata type
-    @type rdtype: int
-    @param tok: The tokenizer or input text
-    @type tok: dns.tokenizer.Tokenizer or string
-    @param origin: The origin to use for relative names
-    @type origin: dns.name.Name
-    @param relativize: Should names be relativized?
-    @type relativize: bool
-    @rtype: dns.rdata.Rdata instance"""
+    :param rdclass: The rdata class
+    :type rdclass: int
+    :param rdtype: The rdata type
+    :type rdtype: int
+    :param tok: The tokenizer or input text
+    :type tok: dns.tokenizer.Tokenizer or string
+    :param origin: The origin to use for relative names
+    :type origin: dns.name.Name
+    :param relativize: Should names be relativized?
+    :type relativize: bool
+    :rtype: dns.rdata.Rdata instance"""
 
     if isinstance(tok, str):
         tok = dns.tokenizer.Tokenizer(tok)
@@ -459,19 +459,19 @@ def from_wire(rdclass, rdtype, wire, current, rdlen, origin = None):
     Once a class is chosen, its from_wire() class method is called
     with the parameters to this function.
 
-    @param rdclass: The rdata class
-    @type rdclass: int
-    @param rdtype: The rdata type
-    @type rdtype: int
-    @param wire: The wire-format message
-    @type wire: string
-    @param current: The offet in wire of the beginning of the rdata.
-    @type current: int
-    @param rdlen: The length of the wire-format rdata
-    @type rdlen: int
-    @param origin: The origin to use for relative names
-    @type origin: dns.name.Name
-    @rtype: dns.rdata.Rdata instance"""
+    :param rdclass: The rdata class
+    :type rdclass: int
+    :param rdtype: The rdata type
+    :type rdtype: int
+    :param wire: The wire-format message
+    :type wire: string
+    :param current: The offet in wire of the beginning of the rdata.
+    :type current: int
+    :param rdlen: The length of the wire-format rdata
+    :type rdlen: int
+    :param origin: The origin to use for relative names
+    :type origin: dns.name.Name
+    :rtype: dns.rdata.Rdata instance"""
 
     wire = dns.wiredata.maybe_wrap(wire)
     cls = get_rdata_class(rdclass, rdtype)

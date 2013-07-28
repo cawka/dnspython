@@ -59,10 +59,10 @@ class UnknownRcode(dns.exception.DNSException):
 def from_text(text):
     """Convert text into an rcode.
 
-    @param text: the texual rcode
-    @type text: string
-    @raises UnknownRcode: the rcode is unknown
-    @rtype: int
+    :param text: the texual rcode
+    :type text: string
+    :raises UnknownRcode: the rcode is unknown
+    :rtype: int
     """
 
     if text.isdigit():
@@ -77,12 +77,12 @@ def from_text(text):
 def from_flags(flags, ednsflags):
     """Return the rcode value encoded by flags and ednsflags.
 
-    @param flags: the DNS flags
-    @type flags: int
-    @param ednsflags: the EDNS flags
-    @type ednsflags: int
-    @raises ValueError: rcode is < 0 or > 4095
-    @rtype: int
+    :param flags: the DNS flags
+    :type flags: int
+    :param ednsflags: the EDNS flags
+    :type ednsflags: int
+    :raises ValueError: rcode is < 0 or > 4095
+    :rtype: int
     """
 
     value = (flags & 0x000f) | ((ednsflags >> 20) & 0xff0)
@@ -93,10 +93,10 @@ def from_flags(flags, ednsflags):
 def to_flags(value):
     """Return a (flags, ednsflags) tuple which encodes the rcode.
 
-    @param value: the rcode
-    @type value: int
-    @raises ValueError: rcode is < 0 or > 4095
-    @rtype: (int, int) tuple
+    :param value: the rcode
+    :type value: int
+    :raises ValueError: rcode is < 0 or > 4095
+    :rtype: (int, int) tuple
     """
 
     if value < 0 or value > 4095:
@@ -108,9 +108,9 @@ def to_flags(value):
 def to_text(value):
     """Convert rcode into text.
 
-    @param value: the rcode
-    @type value: int
-    @rtype: string
+    :param value: the rcode
+    :type value: int
+    :rtype: string
     """
 
     text = _by_value.get(value)

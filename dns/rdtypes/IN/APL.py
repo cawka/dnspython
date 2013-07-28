@@ -24,14 +24,14 @@ import dns.tokenizer
 class APLItem(object):
     """An APL list item.
 
-    @ivar family: the address family (IANA address family registry)
-    @type family: int
-    @ivar negation: is this item negated?
-    @type negation: bool
-    @ivar address: the address
-    @type address: string
-    @ivar prefix: the prefix length
-    @type prefix: int
+    :ivar family: the address family (IANA address family registry)
+    :type family: int
+    :ivar negation: is this item negated?
+    :type negation: bool
+    :ivar address: the address
+    :type address: string
+    :ivar prefix: the prefix length
+    :type prefix: int
     """
 
     __slots__ = ['family', 'negation', 'address', 'prefix']
@@ -75,8 +75,8 @@ class APLItem(object):
 class APL(dns.rdata.Rdata):
     """APL record.
 
-    @ivar items: a list of APL items
-    @type items: list of APL_Item
+    :ivar items: a list of APL items
+    :type items: list of APL_Item
     @see: RFC 3123"""
 
     __slots__ = ['items']

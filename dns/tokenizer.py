@@ -49,23 +49,23 @@ class UngetBufferFull(dns.exception.DNSException):
 class Token(object):
     """A DNS master file format token.
 
-    @ivar ttype: The token type
-    @type ttype: int
-    @ivar value: The token value
-    @type value: string
-    @ivar has_escape: Does the token value contain escapes?
-    @type has_escape: bool
+    :ivar ttype: The token type
+    :type ttype: int
+    :ivar value: The token value
+    :type value: string
+    :ivar has_escape: Does the token value contain escapes?
+    :type has_escape: bool
     """
 
     def __init__(self, ttype, value='', has_escape=False):
         """Initialize a token instance.
 
-        @param ttype: The token type
-        @type ttype: int
-        @param value: The token value
-        @type value: string
-        @param has_escape: Does the token value contain escapes?
-        @type has_escape: bool
+        :param ttype: The token type
+        :type ttype: int
+        :param value: The token value
+        :type value: string
+        :param has_escape: Does the token value contain escapes?
+        :type has_escape: bool
         """
         self.ttype = ttype
         self.value = value
@@ -162,39 +162,39 @@ class Tokenizer(object):
     I{value} is a string.  The valid types are EOF, EOL, WHITESPACE,
     IDENTIFIER, QUOTED_STRING, COMMENT, and DELIMITER.
 
-    @ivar file: The file to tokenize
-    @type file: file
-    @ivar ungotten_char: The most recently ungotten character, or None.
-    @type ungotten_char: string
-    @ivar ungotten_token: The most recently ungotten token, or None.
-    @type ungotten_token: (int, string) token tuple
-    @ivar multiline: The current multiline level.  This value is increased
+    :ivar file: The file to tokenize
+    :type file: file
+    :ivar ungotten_char: The most recently ungotten character, or None.
+    :type ungotten_char: string
+    :ivar ungotten_token: The most recently ungotten token, or None.
+    :type ungotten_token: (int, string) token tuple
+    :ivar multiline: The current multiline level.  This value is increased
     by one every time a '(' delimiter is read, and decreased by one every time
     a ')' delimiter is read.
-    @type multiline: int
-    @ivar quoting: This variable is true if the tokenizer is currently
+    :type multiline: int
+    :ivar quoting: This variable is true if the tokenizer is currently
     reading a quoted string.
-    @type quoting: bool
-    @ivar eof: This variable is true if the tokenizer has encountered EOF.
-    @type eof: bool
-    @ivar delimiters: The current delimiter dictionary.
-    @type delimiters: dict
-    @ivar line_number: The current line number
-    @type line_number: int
-    @ivar filename: A filename that will be returned by the L{where} method.
-    @type filename: string
+    :type quoting: bool
+    :ivar eof: This variable is true if the tokenizer has encountered EOF.
+    :type eof: bool
+    :ivar delimiters: The current delimiter dictionary.
+    :type delimiters: dict
+    :ivar line_number: The current line number
+    :type line_number: int
+    :ivar filename: A filename that will be returned by the L{where} method.
+    :type filename: string
     """
 
     def __init__(self, f=sys.stdin, filename=None):
         """Initialize a tokenizer instance.
 
-        @param f: The file to tokenize.  The default is sys.stdin.
+        :param f: The file to tokenize.  The default is sys.stdin.
         This parameter may also be a string, in which case the tokenizer
         will take its input from the contents of the string.
-        @type f: file or string
-        @param filename: the name of the filename that the L{where} method
+        :type f: file or string
+        :param filename: the name of the filename that the L{where} method
         will return.
-        @type filename: string
+        :type filename: string
         """
 
         if isinstance(f, str):
@@ -219,7 +219,7 @@ class Tokenizer(object):
 
     def _get_char(self):
         """Read a character from input.
-        @rtype: string
+        :rtype: string
         """
 
         if self.ungotten_char is None:
@@ -239,7 +239,7 @@ class Tokenizer(object):
     def where(self):
         """Return the current location in the input.
 
-        @rtype: (string, int) tuple.  The first item is the filename of
+        :rtype: (string, int) tuple.  The first item is the filename of
         the input, the second is the current line number.
         """
 
@@ -252,9 +252,9 @@ class Tokenizer(object):
         an error to try to unget a character when the unget buffer is not
         empty.
 
-        @param c: the character to unget
-        @type c: string
-        @raises UngetBufferFull: there is already an ungotten char
+        :param c: the character to unget
+        :type c: string
+        :raises UngetBufferFull: there is already an ungotten char
         """
 
         if not self.ungotten_char is None:
@@ -269,7 +269,7 @@ class Tokenizer(object):
 
         If the tokenizer is in multiline mode, then newlines are whitespace.
 
-        @rtype: int
+        :rtype: int
         """
 
         skipped = 0
@@ -284,15 +284,15 @@ class Tokenizer(object):
     def get(self, want_leading = False, want_comment = False):
         """Get the next token.
 
-        @param want_leading: If True, return a WHITESPACE token if the
+        :param want_leading: If True, return a WHITESPACE token if the
         first character read is whitespace.  The default is False.
-        @type want_leading: bool
-        @param want_comment: If True, return a COMMENT token if the
+        :type want_leading: bool
+        :param want_comment: If True, return a COMMENT token if the
         first token read is a comment.  The default is False.
-        @type want_comment: bool
-        @rtype: Token object
-        @raises dns.exception.UnexpectedEnd: input ended prematurely
-        @raises dns.exception.SyntaxError: input was badly formed
+        :type want_comment: bool
+        :rtype: Token object
+        :raises dns.exception.UnexpectedEnd: input ended prematurely
+        :raises dns.exception.SyntaxError: input was badly formed
         """
 
         if not self.ungotten_token is None:
@@ -410,9 +410,9 @@ class Tokenizer(object):
         an error to try to unget a token when the unget buffer is not
         empty.
 
-        @param token: the token to unget
-        @type token: Token object
-        @raises UngetBufferFull: there is already an ungotten token
+        :param token: the token to unget
+        :type token: Token object
+        :raises UngetBufferFull: there is already an ungotten token
         """
 
         if not self.ungotten_token is None:
@@ -421,7 +421,7 @@ class Tokenizer(object):
 
     def next(self):
         """Return the next item in an iteration.
-        @rtype: (int, string)
+        :rtype: (int, string)
         """
 
         token = self.get()
@@ -437,8 +437,8 @@ class Tokenizer(object):
     def get_int(self):
         """Read the next token and interpret it as an integer.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: int
+        :raises dns.exception.SyntaxError:
+        :rtype: int
         """
 
         token = self.get().unescape()
@@ -452,8 +452,8 @@ class Tokenizer(object):
         """Read the next token and interpret it as an 8-bit unsigned
         integer.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: int
+        :raises dns.exception.SyntaxError:
+        :rtype: int
         """
 
         value = self.get_int()
@@ -465,8 +465,8 @@ class Tokenizer(object):
         """Read the next token and interpret it as a 16-bit unsigned
         integer.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: int
+        :raises dns.exception.SyntaxError:
+        :rtype: int
         """
 
         value = self.get_int()
@@ -478,8 +478,8 @@ class Tokenizer(object):
         """Read the next token and interpret it as a 32-bit unsigned
         integer.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: int
+        :raises dns.exception.SyntaxError:
+        :rtype: int
         """
 
         token = self.get().unescape()
@@ -495,8 +495,8 @@ class Tokenizer(object):
     def get_string(self, origin=None):
         """Read the next token and interpret it as a string.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: string
+        :raises dns.exception.SyntaxError:
+        :rtype: string
         """
 
         token = self.get().unescape()
@@ -507,8 +507,8 @@ class Tokenizer(object):
     def get_identifier(self, origin=None):
         """Read the next token and raise an exception if it is not an identifier.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: string
+        :raises dns.exception.SyntaxError:
+        :rtype: string
         """
 
         token = self.get().unescape()
@@ -519,8 +519,8 @@ class Tokenizer(object):
     def get_name(self, origin=None):
         """Read the next token and interpret it as a DNS name.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: dns.name.Name object"""
+        :raises dns.exception.SyntaxError:
+        :rtype: dns.name.Name object"""
 
         token = self.get()
         if not token.is_identifier():
@@ -531,8 +531,8 @@ class Tokenizer(object):
         """Read the next token and raise an exception if it isn't EOL or
         EOF.
 
-        @raises dns.exception.SyntaxError:
-        @rtype: string
+        :raises dns.exception.SyntaxError:
+        :rtype: string
         """
 
         token = self.get()
